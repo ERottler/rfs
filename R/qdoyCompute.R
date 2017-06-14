@@ -3,7 +3,7 @@
 #' \url{https://github.com/brry/berryFunctions/blob/master/R/seasonality.R}
 #' @return Matrix for each DOY and quantile
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jun 2017
-#' @seealso \code{\link{help}}, \code{\link{help}}
+#' @seealso \code{\link{qdoyPeriods}}
 #' @keywords ts chron
 #' @importFrom berryFunctions quantileMean l2df getColumn
 #' @importFrom pbapply pblapply
@@ -32,7 +32,7 @@
 #'                 Larger values of width require more computing time.
 #'                 DEFAULT: 3
 #' @param quiet    Logical: suppress progress bar? DEFAULT: FALSE
-#' @param \dots Further arguments passed to \code{\link{plot}}
+#' @param \dots    Further arguments, currently ignored
 #'
 qdoyCompute <- function(
 dates,

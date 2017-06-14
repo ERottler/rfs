@@ -31,7 +31,7 @@ DEFAULT: 3}
 
 \item{quiet}{Logical: suppress progress bar? DEFAULT: FALSE}
 
-\item{\dots}{Further arguments passed to \code{\link{plot}}}
+\item{\dots}{Further arguments, currently ignored}
 }
 \value{
 Matrix for each DOY and quantile
@@ -49,7 +49,7 @@ lines(1:366, qdoy[,5], col=2)
 
 }
 \seealso{
-\code{\link{help}}, \code{\link{help}}
+\code{\link{qdoyPeriods}}
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, Jun 2017

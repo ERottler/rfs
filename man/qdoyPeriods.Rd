@@ -34,10 +34,13 @@ Enables analysis of seasonality changes over time.
 load(seasFolder("data/dismeta.Rdata"))
 qdoy_Koeln <- qdoyPeriods("Koeln")
 str(qdoy_Koeln)
+qdoy_Koeln <- list(Koeln=qdoy_Koeln, Mainz=qdoyPeriods("Mainz"))
+qdoyVis("Koeln", qdoy_Koeln)
+qdoyVis("Mainz", qdoy_Koeln)
 
 }
 \seealso{
-\code{\link{qdoyCompute}}, \code{\link{help}}
+\code{\link{qdoyCompute}}, \code{\link{qdoyVis}}
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, Jun 2017
