@@ -3,6 +3,7 @@
 export(gnames)
 export(minimap)
 export(seasFolder)
+export(selectDates)
 importFrom(berryFunctions,checkFile)
 importFrom(berryFunctions,smallPlot)
 importFrom(graphics,plot)
