@@ -33,6 +33,13 @@ minimap("Koeln")
 minimap(0) # no stations
 minimap("Cochem", allargs=list(pch=3,cex=0.5))
 
+pdf("test.pdf", height=5)
+hist(rnorm(100))
+minimap(c("Koeln","Rheinfelden"), y1=0.1, y2=0.9, x2=0.9)
+minimap() # all dots
+dev.off()
+unlink("test.pdf")
+
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, Jun 2017

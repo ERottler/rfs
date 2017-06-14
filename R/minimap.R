@@ -15,6 +15,13 @@
 #' minimap(0) # no stations
 #' minimap("Cochem", allargs=list(pch=3,cex=0.5))
 #'
+#' pdf("test.pdf", height=5)
+#' hist(rnorm(100))
+#' minimap(c("Koeln","Rheinfelden"), y1=0.1, y2=0.9, x2=0.9)
+#' minimap() # all dots
+#' dev.off()
+#' unlink("test.pdf")
+#'
 #' @param name        Station name(s) to be plotted with red crosses
 #' @param metadf      Dataframe with metadata. DEFAULT: meta
 #' @param x1,x2,y1,y2 Relative location of minimap
