@@ -21,9 +21,6 @@ seasFolder("dummy.txt")
 stopifnot(length(seasFolder("dummy.txt", "dude.xyz"))==2)
 
 }
-\seealso{
-\code{\link{help}}, \code{\link{help}}
-}
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, Jun 2017
 }
