@@ -1,6 +1,6 @@
 Package: rfs
 Title: Rhine Flood Seasonality Analysis
-Version: 0.0.6
+Version: 0.0.7
 Date: 2017-06-14
 Authors@R: person("Berry", "Boessenkool", email = "berry-b@gmx.de", role = c("aut", "cre"))
 Description: This packgage contains the code for my PhD project on Rhine flood seasonality changes.
