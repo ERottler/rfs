@@ -4,16 +4,20 @@
 \alias{qdoyVis}
 \title{Visualize seasonality changes}
 \usage{
-qdoyVis(name, seaslist, metadf = get("meta"), steps = 1:3, probs = 1:4,
-  map = TRUE, axis = TRUE, legend = TRUE, x1 = 0.65, x2 = 0.95,
-  y1 = 0.85, y2 = 1, text = TRUE, mar = c(1.8, 3.2, 3, 0.2),
-  cex.axis = 1, boxcol = 1, boxlwd = 1, maincex = 1, mainline = NA,
-  mainadj = 0.35, mainsep = "\\n", xticks.lwd = 1, x.line = 0, ...)
+qdoyVis(name, seaslist, qdp = seaslist[[name]], metadf = get("meta"),
+  steps = 1:3, probs = 1:4, map = TRUE, axis = TRUE, legend = TRUE,
+  x1 = 0.65, x2 = 0.95, y1 = 0.85, y2 = 1, text = TRUE, mar = c(1.8,
+  3.2, 3, 0.2), cex.axis = 1, boxcol = 1, boxlwd = 1, maincex = 1,
+  mainline = NA, mainadj = 0.35, mainsep = "\\n", xticks.lwd = 1,
+  x.line = 0, ...)
 }
 \arguments{
-\item{name}{Gauge name}
+\item{name}{Gauge station name}
 
-\item{seaslist}{List returned by \code{lapply(SOMENAMES, qdoyPeriods)}}
+\item{seaslist}{Named list as e.g. returned by \code{lapply(SOMENAMES, qdoyPeriods)}}
+
+\item{qdp}{Array with qualtiles per doy and period as retuned by
+\code{\link{qdoyPeriods}}. DEFAULT: seaslist[[name]]}
 
 \item{metadf}{Dataframe with metadata. DEFAULT: meta}
 

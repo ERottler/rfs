@@ -10,8 +10,10 @@
 #' @examples
 #' # see qdoyPeriods
 #'
-#' @param name        Gauge name
-#' @param seaslist    List returned by \code{lapply(SOMENAMES, qdoyPeriods)}
+#' @param name        Gauge station name
+#' @param seaslist    Named list as e.g. returned by \code{lapply(SOMENAMES, qdoyPeriods)}
+#' @param qdp         Array with qualtiles per doy and period as retuned by
+#'                    \code{\link{qdoyPeriods}}. DEFAULT: seaslist[[name]]
 #' @param metadf      Dataframe with metadata. DEFAULT: meta
 #' @param steps,probs Which of the periods and quantiles should be plotted?
 #'                    DEFAULT: 1:3, 1:4 (all of them)
@@ -30,6 +32,7 @@
 qdoyVis <- function(
 name,
 seaslist,
+qdp=seaslist[[name]],
 metadf=get("meta"),
 steps=1:3,
 probs=1:4,
@@ -51,13 +54,12 @@ x.line=0,
 ...)
 {
 par(mar=mar)
-si <- seaslist[[name]]
 col <- seqPal(3,gb=T)
-plot(1:366, type="n", xaxs="i", axes=FALSE, ylim=lim0(si), xlab="", ylab="", las=1, ...)
+plot(1:366, type="n", xaxs="i", axes=FALSE, ylim=lim0(qdp), xlab="", ylab="", las=1, ...)
 at <- pretty2(par("usr")[3:4], n=4)
 at <- unique(c(0,at)) # sometimes zero is missing
 axis(2, at=at, mgp=c(3,0.5,0), cex.axis=cex.axis, las=1)
-for(p in probs) for(s in steps) lines(si[,p,s], col=col[s], lwd=3)
+for(p in probs) for(s in steps) lines(qdp[,p,s], col=col[s], lwd=3)
 abline(v=117+1)
 box(col=boxcol, lwd=boxlwd)
 ##if(box) box(col=boxcol[name], lwd=4)
@@ -80,9 +82,9 @@ if(axis)
    }
 if(text)
   {
-  probt <- dimnames(si)[[2]]
+  probt <- dimnames(qdp)[[2]]
   texti <- seq(from=200, to=40, length.out=length(probt))
-  texty <- apply(si, MARGIN=1:2, mean, na.rm=TRUE)[texti,seq_along(probt)]
+  texty <- apply(qdp, MARGIN=1:2, mean, na.rm=TRUE)[texti,seq_along(probt)]
   if(length(probt)!=1) texty <- diag(texty)
   textField(x=texti[probs], y=texty[probs], labels=probt[probs], quiet=TRUE, cex=cex.axis)
   }
