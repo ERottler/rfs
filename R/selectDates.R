@@ -27,8 +27,8 @@ m2=1,d2=1,
 df=get("dis"),
 logic=FALSE)
 {
-TF <- df[,"date"] > as.Date(paste(y1,m1,d1, sep="-")) &
-      df[,"date"] < as.Date(paste(y2,m2,d2, sep="-"))
+TF <- df[,"date"] >= as.Date(paste(y1,m1,d1, sep="-")) &
+      df[,"date"] <  as.Date(paste(y2,m2,d2, sep="-"))
 if(logic) return(TF)
 df[TF,]
 }
