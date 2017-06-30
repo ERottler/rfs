@@ -4,32 +4,23 @@
 \alias{qdoyCompute}
 \title{Quantile estimation per DOY}
 \usage{
-qdoyCompute(dates, values, data, shift = 0, probs = c(0, 25, 50, 75, 95,
-  99.9)/100, width = 3, quiet = FALSE, ...)
+qdoyCompute(dates, values, data, shift = 0, RPs = c(1, 2, 5, 10, 20, 50,
+  100, 200), ...)
 }
 \arguments{
 \item{dates}{Dates in ascending order.
 Can be charater strings or \code{\link{strptime}} results,
 as accepted (and coerced) by \code{\link{as.Date}}}
 
-\item{values}{Values to be mapped in color with \code{\link{colPoints}}}
+\item{values}{Values to be analyzed}
 
 \item{data}{Optional: data.frame with the column names as given by dates and values}
 
-\item{shift}{Number of days to move the year-break to.
+\item{shift}{Number of days prior to Jan 1 to move the year-break to.
 E.g. shift=61 for German hydrological year (Nov to Oct). DEFAULT: 0}
 
-\item{probs}{Probabilities passed to \code{\link{quantileMean}} for plot=4.
-DEFAULT: c(0,25,50,75,95,99)/100}
-
-\item{width}{Numeric: window width for plot=4. Used as sd in gaussian weighting.
-Support (number of values around a DOY passed to
-quantile funtion at least once) is ca 4.9*width.
-The value at doy itself is used 10 times.
-Larger values of width require more computing time.
-DEFAULT: 3}
-
-\item{quiet}{Logical: suppress progress bar? DEFAULT: FALSE}
+\item{RPs}{Return periods for \code{extremeStat::\link[extremeStat]{distLextreme}}
+DEFAULT: c(1,2,4,30,50,100)}
 
 \item{\dots}{Further arguments, currently ignored}
 }
@@ -41,11 +32,7 @@ Quantiles per Day of Year (doy), basically forked from
 \url{https://github.com/brry/berryFunctions/blob/master/R/seasonality.R}
 }
 \examples{
-load(seasFolder("data/dismeta.Rdata"))
-qdoy <- qdoyCompute("date", "Koeln", data=dis)
-str(qdoy)
-plot(1:366, qdoy[,6], ylim=c(400,11000), type="l")
-lines(1:366, qdoy[,5], col=2)
+# to be abstracted from testing
 
 }
 \seealso{
