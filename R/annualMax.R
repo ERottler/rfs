@@ -12,6 +12,9 @@
 #' head(data.frame(annual_max))
 #' plot(as.numeric(names(annual_max)), annual_max, type="l", las=1, xlab="year")
 #'
+#' head(annualMax("date","Koeln", dis))
+#' head(annualMax("date","Koeln", dis, shift=117)) # hydrological year
+#'
 #' @param dates    Dates in ascending order.
 #'                 Can be charater strings or \code{\link{strptime}} results,
 #'                 as accepted (and coerced) by \code{\link{as.Date}}

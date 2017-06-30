@@ -32,6 +32,9 @@ annual_max <- annualMax("date","Koeln", dis)
 head(data.frame(annual_max))
 plot(as.numeric(names(annual_max)), annual_max, type="l", las=1, xlab="year")
 
+head(annualMax("date","Koeln", dis))
+head(annualMax("date","Koeln", dis, shift=117)) # hydrological year
+
 }
 \seealso{
 \code{\link{qdoyCompute}}
