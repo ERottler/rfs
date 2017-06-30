@@ -46,6 +46,7 @@ seasAxis <- function(
 )
 {
 
+shift <- checkShift(shift)
 # Axis labelling positions:
 tick <- monthLabs(2004,2004, npm=1) + shift
 labs <- tick + 15

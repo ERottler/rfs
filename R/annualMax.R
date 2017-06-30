@@ -45,9 +45,7 @@ if(length(dates)!=length(values)) stop("length of dates and values not equal (",
 dates <- as.Date(dates)
 
 # shift break to other month
-if(shift<0) warning("'shift' was negative (",shift,"). Absolute value now used.")
-shift <- abs(shift)
-if(shift>366) stop("'shift' is", shift, ", but should be between 0 and 366.")
+shift <- checkShift(shift)
 dates <- dates + shift
 
 # Annual maxima
