@@ -5,7 +5,7 @@
 \title{DOY quantiles for several periods}
 \usage{
 qdoyPeriods(name, disdf = get("dis"), sans1999 = FALSE, shift = 117,
-  RPs = RPs, time = c(1920, 1950, 1980, 2010), ...)
+  RPs = RPvals, time = c(1920, 1950, 1980, 2010), ...)
 }
 \arguments{
 \item{name}{Character: Name of gauge to be analyzed, see \code{\link{gnames}}}
@@ -32,11 +32,11 @@ Enables analysis of seasonality changes over time.
 \examples{
 \dontrun{
 load(seasFolder("data/dismeta.Rdata"))
-qdoy_Koeln <- qdoyPeriods("Koeln")
-str(qdoy_Koeln)
-qdoy_Koeln <- list(Koeln=qdoy_Koeln, Mainz=qdoyPeriods("Mainz"))
-qdoyVis("Koeln", qdoy_Koeln)
-qdoyVis("Mainz", qdoy_Koeln)
+qdoy <- qdoyPeriods("Koeln") # 3x3 seconds
+str(qdoy)
+qdoy <- list(Koeln=qdoy, Mainz=qdoyPeriods("Mainz"))
+qdoyVisChange("Koeln", qdoy)
+qdoyVisChange("Mainz", qdoy)
 }
 
 }

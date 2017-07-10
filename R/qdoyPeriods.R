@@ -10,11 +10,11 @@
 #' @examples
 #' \dontrun{
 #' load(seasFolder("data/dismeta.Rdata"))
-#' qdoy_Koeln <- qdoyPeriods("Koeln")
-#' str(qdoy_Koeln)
-#' qdoy_Koeln <- list(Koeln=qdoy_Koeln, Mainz=qdoyPeriods("Mainz"))
-#' qdoyVis("Koeln", qdoy_Koeln)
-#' qdoyVis("Mainz", qdoy_Koeln)
+#' qdoy <- qdoyPeriods("Koeln") # 3x3 seconds
+#' str(qdoy)
+#' qdoy <- list(Koeln=qdoy, Mainz=qdoyPeriods("Mainz"))
+#' qdoyVisChange("Koeln", qdoy)
+#' qdoyVisChange("Mainz", qdoy)
 #' }
 #'
 #' @param name       Character: Name of gauge to be analyzed, see \code{\link{gnames}}
@@ -31,7 +31,7 @@ name,
 disdf=get("dis"),
 sans1999=FALSE,
 shift=117,
-RPs=RPs,
+RPs=RPvals,
 time=c(1920,1950,1980,2010),
 ...)
 {
@@ -46,7 +46,7 @@ out <- lapply(seq_along(time[-1]), function(step){
   qdoyCompute(sdi$date, sdi[,2], quiet=TRUE, shift=shift, RPs=RPs, ...)
   })
 out <- l2array(out)
-names(dimnames(out))[3] <- "Period"
-dimnames(out)[[3]] <- paste(time[-length(time)], time[-1], sep="-")
+names(dimnames(out))[4] <- "Period"
+dimnames(out)[[4]] <- paste(time[-length(time)], time[-1], sep="-")
 out
 }
