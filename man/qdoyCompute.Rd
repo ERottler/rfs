@@ -4,8 +4,7 @@
 \alias{qdoyCompute}
 \title{Quantile estimation per DOY}
 \usage{
-qdoyCompute(dates, values, data, shift = 0, RPs = c(1, 2, 5, 10, 20, 50,
-  100, 200), ...)
+qdoyCompute(dates, values, data, shift = 0, RPs = RPs, ...)
 }
 \arguments{
 \item{dates}{Dates in ascending order.
@@ -20,7 +19,7 @@ as accepted (and coerced) by \code{\link{as.Date}}}
 E.g. shift=61 for German hydrological year (Nov to Oct). DEFAULT: 0}
 
 \item{RPs}{Return periods for \code{extremeStat::\link[extremeStat]{distLextreme}}
-DEFAULT: c(1,2,4,30,50,100)}
+DEFAULT: \code{\link{RPs}}}
 
 \item{\dots}{Further arguments, currently ignored}
 }

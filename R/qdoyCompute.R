@@ -20,7 +20,7 @@
 #' @param shift    Number of days prior to Jan 1 to move the year-break to.
 #'                 E.g. shift=61 for German hydrological year (Nov to Oct). DEFAULT: 0
 #' @param RPs      Return periods for \code{extremeStat::\link[extremeStat]{distLextreme}}
-#'                 DEFAULT: c(1,2,4,30,50,100)
+#'                 DEFAULT: \code{\link{RPs}}
 #' @param \dots    Further arguments, currently ignored
 #'
 qdoyCompute <- function(
@@ -28,7 +28,7 @@ dates,
 values,
 data,
 shift=0,
-RPs=c(1,2,5,10,20,50,100,200),
+RPs=RPs,
 ...
 )
 {
@@ -70,10 +70,8 @@ dd <- selectDates(1980,2020, df=dis)[,c("date","Koeln")]
 qdoy   <- qdoyCompute("date", "Koeln", data=dis, shift=117) # 10 secs
 qdoy30 <- qdoyCompute("date", "Koeln", data=dd,  shift=117) # 5 secs
 
-rpcols <- divPal(8, gp=T)
-names(rpcols) <- paste0("RP.",c(1,2,5,10,20,50,100,200))
 
-plotqdoy <- function(dist, qd=qdoy, RPs=c(1,2,10,50,200), cols=rpcols, ylim=lim0(10900)  )
+plotqdoy <- function(dist, qd=qdoy, RPs=c(1,2,10,50,200), cols=RPcols, ylim=lim0(10900)  )
 {
 plot(1:366, 1:366, ylim=ylim, las=1, type="n", main=dist, xaxt="n", xlab="",
      ylab="discharge  [m\U{00B3}/s]")

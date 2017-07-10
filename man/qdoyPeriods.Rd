@@ -5,8 +5,7 @@
 \title{DOY quantiles for several periods}
 \usage{
 qdoyPeriods(name, disdf = get("dis"), sans1999 = FALSE, shift = 117,
-  RPs = c(1, 2, 5, 10, 20, 50, 100, 200), time = c(1920, 1950, 1980, 2010),
-  ...)
+  RPs = RPs, time = c(1920, 1950, 1980, 2010), ...)
 }
 \arguments{
 \item{name}{Character: Name of gauge to be analyzed, see \code{\link{gnames}}}
