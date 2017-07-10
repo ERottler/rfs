@@ -20,7 +20,7 @@
 #' @param shift    Number of days prior to Jan 1 to move the year-break to.
 #'                 E.g. shift=61 for German hydrological year (Nov to Oct). DEFAULT: 0
 #' @param RPs      Return periods for \code{extremeStat::\link[extremeStat]{distLextreme}}
-#'                 DEFAULT: \code{\link{RPs}}
+#'                 DEFAULT: \code{\link{RPvals}}
 #' @param \dots    Further arguments, currently ignored
 #'
 qdoyCompute <- function(
@@ -28,11 +28,10 @@ dates,
 values,
 data,
 shift=0,
-RPs=RPs,
+RPs=RPvals,
 ...
 )
 {
-
 # input columns or vectors
 if(!missing(data)) # get vectors from data.frame
   {
