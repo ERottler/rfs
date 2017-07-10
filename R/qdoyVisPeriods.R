@@ -30,7 +30,7 @@
 #' @param xticks.lwd,x.line X axis tick width and line. DEFAULT. 1,0
 #' @param \dots       Further arguments passed to \code{\link{qdoyCompute}}
 #'
-qdoyVisChange <- function(
+qdoyVisPeriods <- function(
 name,
 seaslist,
 qdp=seaslist[[name]],

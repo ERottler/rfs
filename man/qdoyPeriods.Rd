@@ -35,8 +35,8 @@ load(seasFolder("data/dismeta.Rdata"))
 qdoy <- qdoyPeriods("Koeln") # 3x3 seconds
 str(qdoy)
 qdoy <- list(Koeln=qdoy, Mainz=qdoyPeriods("Mainz"))
-qdoyVisChange("Koeln", qdoy)
-qdoyVisChange("Mainz", qdoy)
+qdoyVisPeriods("Koeln", qdoy)
+qdoyVisPeriods("Mainz", qdoy)
 }
 
 }

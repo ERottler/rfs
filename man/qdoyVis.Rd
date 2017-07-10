@@ -51,7 +51,7 @@ legend("topright", c("empirical", "gev"), col=3:4, lwd=3)
 
 }
 \seealso{
-\code{\link{qdoyCompute}}, \code{\link{qdoyVisChange}}
+\code{\link{qdoyCompute}}, \code{\link{qdoyVisPeriods}}
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, Jul 2017

@@ -2,7 +2,7 @@
 #' @description  Visualize seasonality of discharge via quantile per DOY.
 #' @return Nothing, only plots
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jul 2017
-#' @seealso \code{\link{qdoyCompute}}, \code{\link{qdoyVisChange}}
+#' @seealso \code{\link{qdoyCompute}}, \code{\link{qdoyVisPeriods}}
 #' @keywords aplot
 #' @importFrom berryFunctions lim0
 #' @export
