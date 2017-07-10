@@ -44,7 +44,7 @@ labelindex=200,
 ...)
 {
 RPs <- paste0("RP.",RPs)
-if(is.na(ylim)) ylim <- lim0(qd[dist, RPs, ])
+if(all(is.na(ylim))) ylim <- lim0(qd[dist, RPs, ])
 if(!add)
   {
   plot(1:366, 1:366, ylim=ylim, las=1, type="n", main=main, xaxt="n", xaxs="i",
