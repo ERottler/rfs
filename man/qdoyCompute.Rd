@@ -4,7 +4,7 @@
 \alias{qdoyCompute}
 \title{Quantile estimation per DOY}
 \usage{
-qdoyCompute(dates, values, data, shift = 0, RPs = RPs, ...)
+qdoyCompute(dates, values, data, shift = 0, RPs = RPvals, ...)
 }
 \arguments{
 \item{dates}{Dates in ascending order.
@@ -19,7 +19,7 @@ as accepted (and coerced) by \code{\link{as.Date}}}
 E.g. shift=61 for German hydrological year (Nov to Oct). DEFAULT: 0}
 
 \item{RPs}{Return periods for \code{extremeStat::\link[extremeStat]{distLextreme}}
-DEFAULT: \code{\link{RPs}}}
+DEFAULT: \code{\link{RPvals}}}
 
 \item{\dots}{Further arguments, currently ignored}
 }
@@ -31,11 +31,11 @@ Quantiles per Day of Year (doy), basically forked from
 \url{https://github.com/brry/berryFunctions/blob/master/R/seasonality.R}
 }
 \examples{
-# to be abstracted from testing
+# see qdoyVis
 
 }
 \seealso{
-\code{\link{qdoyPeriods}}
+\code{\link{qdoyVis}}, \code{\link{qdoyPeriods}}
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, Jun 2017
