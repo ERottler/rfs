@@ -13,10 +13,11 @@
 #' @param name        Gauge station name
 #' @param seaslist    Named list as e.g. returned by \code{lapply(SOMENAMES, qdoyPeriods)}
 #' @param qdp         Array with qualtiles per doy and period as retuned by
-#'                    \code{\link{qdoyPeriods}}. DEFAULT: seaslist[[name]]
+#'                    \code{\link{qdoyPeriods}}. DEFAULT: \code{seaslist[[name]]}
+#' @param dist        Distribution function: gev or empirical. DEFAULT: "gev"
 #' @param metadf      Dataframe with metadata. DEFAULT: meta
-#' @param steps,probs Which of the periods and quantiles should be plotted?
-#'                    DEFAULT: 1:3, 1:4 (all of them)
+#' @param steps,RPs   Which of the periods and quantiles should be plotted?
+#'                    DEFAULT: 1:3 (all of them), c(1.111,2,10,50,200)
 #' @param map         Should \code{\link{minimap}} be added? DEFAULT: TRUE
 #' @param axis        Should x axis with months be added? DEFAULT: TRUE
 #' @param legend      Should Period legend be added in topright? DEFAULT: TRUE
@@ -27,15 +28,16 @@
 #' @param boxcol,boxlwd Color and width of box around plot region. DEFAULTS: 1,1
 #' @param maincex,mainline,mainadj,mainsep Arguments to customize the title.
 #' @param xticks.lwd,x.line X axis tick width and line. DEFAULT. 1,0
-#' @param \dots      Further arguments passed to \code{\link{qdoyCompute}}
+#' @param \dots       Further arguments passed to \code{\link{qdoyCompute}}
 #'
 qdoyVisChange <- function(
 name,
 seaslist,
 qdp=seaslist[[name]],
+dist="gev",
 metadf=get("meta"),
 steps=1:3,
-probs=1:4,
+RPs=c(1.111,2,10,100),
 map=TRUE,
 axis=TRUE,
 legend=TRUE,
@@ -53,13 +55,14 @@ xticks.lwd=1,
 x.line=0,
 ...)
 {
+RPs <- paste0("RP.",RPs)
 par(mar=mar)
 col <- seqPal(3,gb=T)
-plot(1:366, type="n", xaxs="i", axes=FALSE, ylim=lim0(qdp), xlab="", ylab="", las=1, ...)
+plot(1:366, type="n", xaxs="i", axes=FALSE, ylim=lim0(qdp[,RPs,,]), xlab="", ylab="", las=1, ...)
 at <- pretty2(par("usr")[3:4], n=4)
 at <- unique(c(0,at)) # sometimes zero is missing
 axis(2, at=at, mgp=c(3,0.5,0), cex.axis=cex.axis, las=1)
-for(p in probs) for(s in steps) lines(qdp[,p,s], col=col[s], lwd=3)
+for(p in RPs) for(s in steps) lines(qdp[dist,p,,s], col=col[s], lwd=3)
 abline(v=117+1)
 box(col=boxcol, lwd=boxlwd)
 ##if(box) box(col=boxcol[name], lwd=4)
@@ -82,10 +85,10 @@ if(axis)
    }
 if(text)
   {
-  probt <- dimnames(qdp)[[2]]
-  texti <- seq(from=200, to=40, length.out=length(probt))
-  texty <- apply(qdp, MARGIN=1:2, mean, na.rm=TRUE)[texti,seq_along(probt)]
-  if(length(probt)!=1) texty <- diag(texty)
-  textField(x=texti[probs], y=texty[probs], labels=probt[probs], quiet=TRUE, cex=cex.axis)
+  texti <- seq(from=200, to=40, length.out=length(RPs))
+  names(texti) <- RPs
+  texty <- apply(qdp[dist,,,], MARGIN=1:2, mean, na.rm=TRUE)[RPs,texti]
+  if(length(RPs)!=1) texty <- diag(texty)
+  textField(x=texti, y=texty, labels=RPs, quiet=TRUE, cex=cex.axis)
   }
 }
