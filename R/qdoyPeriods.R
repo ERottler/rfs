@@ -12,7 +12,7 @@
 #' load(seasFolder("data/dismeta.Rdata"))
 #' qdoy <- qdoyPeriods("Koeln") # 3x3 seconds
 #' str(qdoy)
-#' qdoy <- list(Koeln=qdoy, Mainz=qdoyPeriods("Mainz"))
+#' qdoy <- list(Koeln=qdoy, Mainz=qdoyPeriods("Mainz", progbar=FALSE))
 #' qdoyVisPeriods("Koeln", qdoy)
 #' qdoyVisPeriods("Mainz", qdoy)
 #' }

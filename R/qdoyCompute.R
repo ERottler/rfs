@@ -21,6 +21,7 @@
 #'                 E.g. shift=61 for German hydrological year (Nov to Oct). DEFAULT: 0
 #' @param RPs      Return periods for \code{extremeStat::\link[extremeStat]{distLextreme}}
 #'                 DEFAULT: \code{\link{RPvals}}
+#' @param progbar  Logical: show progress bar? DEFAULT: TRUE
 #' @param \dots    Further arguments, currently ignored
 #'
 qdoyCompute <- function(
@@ -29,6 +30,7 @@ values,
 data,
 shift=0,
 RPs=RPvals,
+progbar=TRUE,
 ...
 )
 {
@@ -48,7 +50,8 @@ dates <- dates + shift
 # Day of Year and Return Level:
 doy  <- as.numeric(format(dates,"%j"))
 doy # stiffle rstudio warning about not being used
-RL <- pblapply(1:366, function(day) distLextreme(values[doy==day], RPs=RPs, sel="gev",
+if(progbar) lapply <- pbapply::pblapply
+RL <- lapply(1:366, function(day) distLextreme(values[doy==day], RPs=RPs, sel="gev",
                                       quiet=TRUE, gpd=FALSE, weight=FALSE)$quant)
 # Transform into array:
 RL <- l2array(RL)
