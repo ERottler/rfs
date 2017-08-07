@@ -1,7 +1,7 @@
 #' Seasonality axis
-#'
+#' 
 #' Add monthly axis labels on seasonality plots
-#'
+#' 
 #' @return nothing
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jun 2017
 #' @seealso \code{\link{qdoyVis}}
@@ -13,8 +13,8 @@
 #' plot(1:366, xaxt="n", xaxs="i")
 #' seasAxis(shift=117)
 #' seasAxis(shift=117, targs=list(col.ticks="red"), lwd=3, col="purple")
-#'
-#'
+#' 
+#' 
 #' @param shift   Number of days to move the year-break to.
 #'                E.g. shift=61 for German hydrological year (Nov to Oct). DEFAULT: 0
 #' @param janline Logical: Should horizontal line be plotted at
@@ -31,7 +31,7 @@
 #'                for general axis label. DEFAULT: NULL
 #' @param \dots   Further arguments passed to \code{\link{abline}} for janline
 #'                (excluding \code{v}).
-#'
+#' 
 seasAxis <- function(
   shift=0,
   janline=TRUE,

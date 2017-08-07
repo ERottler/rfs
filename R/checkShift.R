@@ -11,10 +11,10 @@
 #' checkShift(0)
 #' checkShift(pi)
 #' }
-#'
-#'
+#' 
+#' 
 #' @param shift Shifting value to be checked
-#'
+#' 
 checkShift <- function(
 shift
 )

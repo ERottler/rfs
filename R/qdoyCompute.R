@@ -11,7 +11,7 @@
 #' @export
 #' @examples
 #' # see qdoyVis
-#'
+#' 
 #' @param dates    Dates in ascending order.
 #'                 Can be charater strings or \code{\link{strptime}} results,
 #'                 as accepted (and coerced) by \code{\link{as.Date}}
@@ -23,7 +23,7 @@
 #'                 DEFAULT: \code{\link{RPvals}}
 #' @param progbar  Logical: show progress bar? DEFAULT: TRUE
 #' @param \dots    Further arguments, currently ignored
-#'
+#' 
 qdoyCompute <- function(
 dates,
 values,

@@ -10,9 +10,9 @@
 #' seasFolder()
 #' seasFolder("dummy.txt")
 #' stopifnot(length(seasFolder("dummy.txt", "dude.xyz"))==2)
-#'
+#' 
 #' @param \dots Optional filename(s) that will be appended.
-#'
+#' 
 seasFolder <- function(
 ...
 )

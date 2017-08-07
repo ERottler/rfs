@@ -16,7 +16,7 @@
 #' qdoyVisPeriods("Koeln", qdoy)
 #' qdoyVisPeriods("Mainz", qdoy)
 #' }
-#'
+#' 
 #' @param name       Character: Name of gauge to be analyzed, see \code{\link{gnames}}
 #' @param disdf      Dataframe with columns "date" and \code{name}. DEFAULT: dis
 #' @param sans1999   Logical: exclude the values from 1999? (Pentecost flood)
@@ -25,7 +25,7 @@
 #' @param time       Period beginnings (and ending of last one).
 #'                   DEFAULT: c(1920,1950,1980,2010)
 #' @param \dots      Further arguments passed to \code{\link{qdoyCompute}}
-#'
+#' 
 qdoyPeriods <- function(
 name,
 disdf=get("dis"),

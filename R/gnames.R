@@ -1,12 +1,12 @@
 #' @title gauge names
-#'
+#' 
 #' @description streamflow measurement gauge names along the rhine and tributaries.
 #' The default is to return all 196 names in alphabetical order.
 #' With the optional arguments, subsets can be chosen:\cr
 #' large: 55 gauges at large streams\cr
 #' rhine: 12 gauges along the actual Rhine river\cr
 #' poster: 9 regime-representative gauges
-#'
+#' 
 #' @return Vector with names (charstrings)
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jun 2017
 #' @seealso \code{\link{help}}, \code{\link{help}}
@@ -14,10 +14,10 @@
 #' @export
 #' @examples
 #' gnames()
-#'
+#' 
 #' @param large,rhine,poster  Logical: return only a subset of the gauge names? DEFAULT: FALSE
 # @param \dots Further arguments passed to \code{\link{plot}}
-#'
+#' 
 gnames <- function(
 large=FALSE,
 rhine=FALSE,

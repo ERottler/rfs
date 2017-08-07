@@ -9,7 +9,7 @@
 #' @export
 #' @examples
 #' # see qdoyPeriods
-#'
+#' 
 #' @param name        Gauge station name
 #' @param seaslist    Named list as e.g. returned by \code{lapply(SOMENAMES, qdoyPeriods)}
 #' @param qdp         Array with qualtiles per doy and period as retuned by
@@ -29,7 +29,7 @@
 #' @param maincex,mainline,mainadj,mainsep Arguments to customize the title.
 #' @param xticks.lwd,x.line X axis tick width and line. DEFAULT. 1,0
 #' @param \dots       Further arguments passed to \code{\link{qdoyCompute}}
-#'
+#' 
 qdoyVisPeriods <- function(
 name,
 seaslist,
