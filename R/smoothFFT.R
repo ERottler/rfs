@@ -23,8 +23,11 @@
 #' lines(smoothFFT(x, sd=3), col=4)    # works better for seasonal data, I guess
 #' lines(smooth.spline(x,spar=0.45), col=2)
 #'
+#' stopifnot(all(x == smoothFFT(x, -1)))
+#'
 #' @param x     Numerical vector
-#' @param sd    Standard deviation
+#' @param sd    Standard deviation. Determines degree of smoothing.
+#'              Use negative value to return original x.
 #' @param \dots Further arguments passed to \code{fftw::\link[fftw]{IFFT}}
 #'
 smoothFFT <- function(
@@ -33,6 +36,9 @@ sd,
 ...
 )
 {
+if(!is.numeric(x)) stop("x must be numeric, not: ", class(x))
+if(length(sd)!=1) stop("sd must have length 1, not: ", length(sd))
+if(sd<0) return(x)
 n <- length(x)
 pf <- fftw::planFFT(n)
 gauss1 <- dnorm(1:n-n/2+0.5, mean=0, sd=sd)

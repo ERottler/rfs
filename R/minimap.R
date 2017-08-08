@@ -29,7 +29,7 @@
 #' @param pch,lwd,col Point properties
 #' @param allargs     List of arguments passed to all gauge locations first
 #' @param \dots       Further arguments passed to \code{\link{points}}
-#'
+#' 
 minimap = function(
  name,                # station name(s) to be plotted with red crosses
  metadf=meta,
