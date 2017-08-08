@@ -20,6 +20,7 @@
 #' minimap(c("Koeln","Rheinfelden"), y1=0.1, y2=0.9, x2=0.9)
 #' minimap() # all dots
 #' dev.off()
+#' berryFunctions::openFile("test.pdf")
 #' unlink("test.pdf")
 #' 
 #' @param name        Station name(s) to be plotted with red crosses
@@ -28,7 +29,7 @@
 #' @param pch,lwd,col Point properties
 #' @param allargs     List of arguments passed to all gauge locations first
 #' @param \dots       Further arguments passed to \code{\link{points}}
-#' 
+#'
 minimap = function(
  name,                # station name(s) to be plotted with red crosses
  metadf=meta,
@@ -41,7 +42,7 @@ minimap = function(
  ...
  )
 {
-dempath <- seasFolder("maps/dem_small.png")
+dempath <- system.file("extdata/dem_small.png", package="rfs")
 checkFile(dempath)
 meta <- metadf
 smallPlot({

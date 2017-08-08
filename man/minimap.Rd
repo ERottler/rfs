@@ -38,6 +38,7 @@ hist(rnorm(100))
 minimap(c("Koeln","Rheinfelden"), y1=0.1, y2=0.9, x2=0.9)
 minimap() # all dots
 dev.off()
+berryFunctions::openFile("test.pdf")
 unlink("test.pdf")
 
 }
