@@ -61,7 +61,7 @@ x.line=0,
 RPs <- paste0("RP.",RPs)
 par(mar=mar)
 col <- seqPal(3,gb=T)
-plot(1:366, type="n", xaxs="i", axes=FALSE, ylim=lim0(qdp[,RPs,,]), xlab="", ylab="", las=1, ...)
+plot(1:366, type="n", xaxs="i", axes=FALSE, ylim=lim0(qdp[dist,RPs,,]), xlab="", ylab="", las=1, ...)
 at <- pretty2(par("usr")[3:4], n=4)
 at <- unique(c(0,at)) # sometimes zero is missing
 axis(2, at=at, mgp=c(3,0.5,0), cex.axis=cex.axis, las=1)
