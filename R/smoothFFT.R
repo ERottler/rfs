@@ -53,6 +53,7 @@ if(length(sd)!=1) stop("sd must have length 1, not: ", length(sd))
 if(sd<0) return(x)
 n <- length(x)
 isna <- is.na(x)
+if(all(isna)){warning("There are no non-NA values, returning all NAs."); return(x)}
 x <- berryFunctions::approx2(x)
 pf <- fftw::planFFT(n)
 gauss1 <- dnorm(1:n-n/2+0.5, mean=0, sd=sd)
