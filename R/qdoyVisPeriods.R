@@ -65,7 +65,7 @@ plot(1:366, type="n", xaxs="i", axes=FALSE, ylim=lim0(qdp[dist,RPs,,]), xlab="",
 at <- pretty2(par("usr")[3:4], n=4)
 at <- unique(c(0,at)) # sometimes zero is missing
 axis(2, at=at, mgp=c(3,0.5,0), cex.axis=cex.axis, las=1)
-for(p in RPs) for(s in steps) lines(smoothFFT(qdp[dist,p,,s],sd), col=col[s], lwd=3)
+for(p in RPs) for(s in steps) lines(smoothFFT(qdp[dist,p,,s],sd, quiet=TRUE), col=col[s], lwd=3)
 abline(v=117+1)
 box(col=boxcol, lwd=boxlwd)
 ##if(box) box(col=boxcol[name], lwd=4)
