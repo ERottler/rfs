@@ -7,7 +7,7 @@
 \title{smooth time series with FFT}
 \format{An object of class \code{numeric} of length 366.}
 \usage{
-smoothFFT(x, sd, ...)
+smoothFFT(x, sd, keepNA = TRUE, ...)
 
 smoothFFTexampleData
 }
@@ -16,6 +16,12 @@ smoothFFTexampleData
 
 \item{sd}{Standard deviation. Determines degree of smoothing.
 Use negative value to return original x.}
+
+\item{keepNA}{Logical: keep NA values? For computation, NAs will be
+interpolated with
+\code{berryFunctions::\link[berryFunctions]{approx2}}.
+If keepNA=TRUE, the result will again have NAs.
+If keepNA=FALSE, they will remain interpolated. DEFAULT: TRUE}
 
 \item{\dots}{Further arguments passed to \code{fftw::\link[fftw]{IFFT}}}
 }
@@ -30,6 +36,11 @@ x <- cumsum(rnorm(200))
 plot(x, type="l")
 lines(smoothFFT(x, sd=1), col=4)
 lines(smoothFFT(x, sd=4), col=2)
+
+x[105:111] <- NA
+plot(x, type="l")
+lines(smoothFFT(x, sd=3), col=4, lwd=2)
+lines(smoothFFT(x, sd=3, keepNA=FALSE), col=2, lty=3)
 
 x <- smoothFFTexampleData
 plot(x, type="l")
