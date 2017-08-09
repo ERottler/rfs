@@ -15,6 +15,7 @@
 #' qdoy <- list(Koeln=qdoy, Mainz=qdoyPeriods("Mainz", progbar=FALSE))
 #' qdoyVisPeriods("Koeln", qdoy)
 #' qdoyVisPeriods("Mainz", qdoy)
+#' qdoyVisPeriods("Mainz", qdoy, sd=3)
 #' }
 #' 
 #' @param name       Character: Name of gauge to be analyzed, see \code{\link{gnames}}

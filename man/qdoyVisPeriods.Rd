@@ -6,10 +6,11 @@
 \usage{
 qdoyVisPeriods(name, seaslist, qdp = seaslist[[name]], dist = "gev",
   metadf = get("meta"), steps = 1:3, RPs = c(1.111, 2, 10, 100),
-  map = TRUE, axis = TRUE, legend = TRUE, x1 = 0.65, x2 = 0.95,
-  y1 = 0.85, y2 = 1, text = TRUE, mar = c(1.8, 3.2, 3, 0.2),
-  cex.axis = 1, boxcol = 1, boxlwd = 1, maincex = 1, mainline = NA,
-  mainadj = 0.35, mainsep = "\\n", xticks.lwd = 1, x.line = 0, ...)
+  sd = -1, map = TRUE, axis = TRUE, legend = TRUE, x1 = 0.65,
+  x2 = 0.95, y1 = 0.85, y2 = 1, text = TRUE, mar = c(1.8, 3.2, 3,
+  0.2), cex.axis = 1, boxcol = 1, boxlwd = 1, maincex = 1,
+  mainline = NA, mainadj = 0.35, mainsep = "\\n", xticks.lwd = 1,
+  x.line = 0, ...)
 }
 \arguments{
 \item{name}{Gauge station name}
@@ -25,6 +26,9 @@ qdoyVisPeriods(name, seaslist, qdp = seaslist[[name]], dist = "gev",
 
 \item{steps, RPs}{Which of the periods and quantiles should be plotted?
 DEFAULT: 1:3 (all of them), c(1.111,2,10,50,200)}
+
+\item{sd}{Smoothing degree, see \code{\link{smoothFFT}}.
+DEFAULT: negative value to suppress smoothing}
 
 \item{map}{Should \code{\link{minimap}} be added? DEFAULT: TRUE}
 

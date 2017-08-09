@@ -18,6 +18,8 @@
 #' @param metadf      Dataframe with metadata. DEFAULT: meta
 #' @param steps,RPs   Which of the periods and quantiles should be plotted?
 #'                    DEFAULT: 1:3 (all of them), c(1.111,2,10,50,200)
+#' @param sd          Smoothing degree, see \code{\link{smoothFFT}}.
+#'                    DEFAULT: negative value to suppress smoothing
 #' @param map         Should \code{\link{minimap}} be added? DEFAULT: TRUE
 #' @param axis        Should x axis with months be added? DEFAULT: TRUE
 #' @param legend      Should Period legend be added in topright? DEFAULT: TRUE
@@ -38,6 +40,7 @@ dist="gev",
 metadf=get("meta"),
 steps=1:3,
 RPs=c(1.111,2,10,100),
+sd=-1,
 map=TRUE,
 axis=TRUE,
 legend=TRUE,
@@ -62,7 +65,7 @@ plot(1:366, type="n", xaxs="i", axes=FALSE, ylim=lim0(qdp[,RPs,,]), xlab="", yla
 at <- pretty2(par("usr")[3:4], n=4)
 at <- unique(c(0,at)) # sometimes zero is missing
 axis(2, at=at, mgp=c(3,0.5,0), cex.axis=cex.axis, las=1)
-for(p in RPs) for(s in steps) lines(qdp[dist,p,,s], col=col[s], lwd=3)
+for(p in RPs) for(s in steps) lines(smoothFFT(qdp[dist,p,,s],sd), col=col[s], lwd=3)
 abline(v=117+1)
 box(col=boxcol, lwd=boxlwd)
 ##if(box) box(col=boxcol[name], lwd=4)
