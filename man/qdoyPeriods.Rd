@@ -38,6 +38,9 @@ qdoy <- list(Koeln=qdoy, Mainz=qdoyPeriods("Mainz", progbar=FALSE))
 qdoyVisPeriods("Koeln", qdoy)
 qdoyVisPeriods("Mainz", qdoy)
 qdoyVisPeriods("Mainz", qdoy, sd=3)
+
+qdoyNA <- list(Oberriet_Blatten=qdoyPeriods("Oberriet_Blatten", progbar=FALSE))
+qdoyVisPeriods("Oberriet_Blatten", qdoyNA)
 }
 
 }
