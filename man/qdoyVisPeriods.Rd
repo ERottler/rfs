@@ -8,7 +8,7 @@ qdoyVisPeriods(name, seaslist, qdp = seaslist[[name]], dist = "gev",
   metadf = get("meta"), steps = 1:3, RPs = c(1.111, 2, 10, 100),
   sd = -1, map = TRUE, axis = TRUE, legend = TRUE, x1 = 0.65,
   x2 = 0.95, y1 = 0.85, y2 = 1, text = TRUE, mar = c(1.8, 3.2, 3,
-  0.2), cex.axis = 1, boxcol = 1, boxlwd = 1, maincex = 1,
+  0.2), ylim = NA, cex.axis = 1, boxcol = 1, boxlwd = 1, maincex = 1,
   mainline = NA, mainadj = 0.35, mainsep = "\\n", xticks.lwd = 1,
   x.line = 0, ...)
 }
@@ -41,6 +41,11 @@ DEFAULT: negative value to suppress smoothing}
 \item{text}{Should lines be labeled with quantiles? DEFAULT: TRUE}
 
 \item{mar}{Margins passed to \link{par}. DEFAULT: c(1.8,3.2,3,0.2)}
+
+\item{ylim}{Y axis limits. Either a vector with two values, as usual in
+\code{\link{plot}}, or a single value, passed to
+\code{\link[berryFunctions]{lim0}}, or NA for the automatic
+maximum of selected data. DEFAULT: NA}
 
 \item{cex.axis}{Size of axis labels (also y axis) and text. DEFAULT: 1}
 

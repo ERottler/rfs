@@ -26,6 +26,10 @@
 #' @param x1,x2,y1,y2 Location of legend. See \code{\link{smallPlot}}
 #' @param text        Should lines be labeled with quantiles? DEFAULT: TRUE
 #' @param mar         Margins passed to \link{par}. DEFAULT: c(1.8,3.2,3,0.2)
+#' @param ylim        Y axis limits. Either a vector with two values, as usual in
+#'                    \code{\link{plot}}, or a single value, passed to
+#'                    \code{\link[berryFunctions]{lim0}}, or NA for the automatic
+#'                    maximum of selected data. DEFAULT: NA
 #' @param cex.axis    Size of axis labels (also y axis) and text. DEFAULT: 1
 #' @param boxcol,boxlwd Color and width of box around plot region. DEFAULTS: 1,1
 #' @param maincex,mainline,mainadj,mainsep Arguments to customize the title.
@@ -47,6 +51,7 @@ legend=TRUE,
 x1=0.65, x2=0.95, y1=0.85, y2=1,
 text=TRUE,
 mar=c(1.8,3.2,3,0.2),
+ylim=NA,
 cex.axis=1,
 boxcol=1,
 boxlwd=1,
@@ -65,7 +70,10 @@ if(!missing(name)) if(!name %in% names(seaslist)) stop("name '", name,
 RPs <- paste0("RP.",RPs)
 par(mar=mar)
 col <- seqPal(3,gb=T)
-plot(1:366, type="n", xaxs="i", axes=FALSE, ylim=lim0(qdp[dist,RPs,,]), xlab="", ylab="", las=1, ...)
+if(!length(ylim) %in% 1:2) stop("length(ylim) must be 1 or 2, not ",length(ylim))
+ylimi <- if(length(ylim)==2) ylim else
+         if(is.na(ylim)) lim0(qdp[dist,RPs,,]) else lim0(ylim)
+plot(1:366, type="n", xaxs="i", axes=FALSE, ylim=ylimi, xlab="", ylab="", las=1, ...)
 at <- pretty2(par("usr")[3:4], n=4)
 at <- unique(c(0,at)) # sometimes zero is missing
 axis(2, at=at, mgp=c(3,0.5,0), cex.axis=cex.axis, las=1)
