@@ -52,16 +52,18 @@ quiet=FALSE,
 ...
 )
 {
-if(!is.numeric(x)) stop("x must be numeric, not: ", class(x))
-if(length(sd)!=1) stop("sd must have length 1, not: ", length(sd))
-if(sd<0) return(x)
-n <- length(x)
+# input checks:
 isna <- is.na(x)
 if(all(isna))
   {
   if(!quiet) warning("There are no non-NA values, returning all NAs.")
   return(x)
   }
+if(!is.numeric(x)) stop("x must be numeric, not: ", class(x))
+if(length(sd)!=1) stop("sd must have length 1, not: ", length(sd))
+if(sd<0) return(x)
+# actual computation
+n <- length(x)
 x <- berryFunctions::approx2(x)
 pf <- fftw::planFFT(n)
 gauss1 <- dnorm(1:n-n/2+0.5, mean=0, sd=sd)
