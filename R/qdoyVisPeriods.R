@@ -58,6 +58,10 @@ xticks.lwd=1,
 x.line=0,
 ...)
 {
+# check input name
+slname <- deparse(substitute(seaslist))
+if(!missing(name)) if(!name %in% names(seaslist)) stop("name '", name,
+                                        "' is not in seaslist '", slname, "'.")
 RPs <- paste0("RP.",RPs)
 par(mar=mar)
 col <- seqPal(3,gb=T)
