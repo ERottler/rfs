@@ -4,8 +4,7 @@
 \alias{qdoyCompute}
 \title{Quantile estimation per DOY}
 \usage{
-qdoyCompute(dates, values, data, shift = 0, RPs = RPvals, progbar = TRUE,
-  ...)
+qdoyCompute(dates, values, data, shift = 0, RPs = RPvals, progbar = TRUE)
 }
 \arguments{
 \item{dates}{Dates in ascending order.
@@ -23,8 +22,6 @@ E.g. shift=61 for German hydrological year (Nov to Oct). DEFAULT: 0}
 DEFAULT: \code{\link{RPvals}}}
 
 \item{progbar}{Logical: show progress bar? DEFAULT: TRUE}
-
-\item{\dots}{Further arguments, currently ignored}
 }
 \value{
 Matrix for each DOY and quantile

@@ -22,7 +22,6 @@
 #' @param RPs      Return periods for \code{extremeStat::\link[extremeStat]{distLextreme}}
 #'                 DEFAULT: \code{\link{RPvals}}
 #' @param progbar  Logical: show progress bar? DEFAULT: TRUE
-#' @param \dots    Further arguments, currently ignored
 #' 
 qdoyCompute <- function(
 dates,
@@ -30,8 +29,7 @@ values,
 data,
 shift=0,
 RPs=RPvals,
-progbar=TRUE,
-...
+progbar=TRUE
 )
 {
 # input columns or vectors
