@@ -13,4 +13,7 @@ seas
 \description{
 seas: A dataset with streamflow aggregates for seasonality analysis
 }
+\examples{
+str(seas[[1]])
+}
 \keyword{datasets}

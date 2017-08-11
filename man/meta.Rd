@@ -11,4 +11,8 @@ meta
 \description{
 meta: A dataset with meta data about the streamflow gauges
 }
+\examples{
+colnames(meta)
+head(meta[,c(3,4,6,22:28)])
+}
 \keyword{datasets}

@@ -18,20 +18,17 @@ NULL
 #' Each element has an array with 2 distributions, 11 return periods, 366 days and 3 periods.\cr
 #' Included as a dataset in the package with code in R/rfs-package.R
 #' @docType data
-#' @example 
-#' #data(seas)
+#' @examples
 #' str(seas[[1]])
-#' 
 "seas"
 
 #' @title meta data about gauges
 #' @description meta: A dataset with meta data about the streamflow gauges
 #' @format A data.frame with 196 rows for 28 variables
 #' @docType data
-#' @example 
-#' #data(meta)
-#' View(meta)
-#' 
+#' @examples
+#' colnames(meta)
+#' head(meta[,c(3,4,6,22:28)])
 "meta"
 
 
