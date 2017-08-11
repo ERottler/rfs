@@ -27,7 +27,6 @@ None
 Plots DEM as small inset map with desired stations highlighted
 }
 \examples{
-load(seasFolder("data/dismeta.Rdata"))
 plot(1:10)
 minimap("Koeln")
 minimap(0) # no stations
@@ -38,7 +37,7 @@ hist(rnorm(100))
 minimap(c("Koeln","Rheinfelden"), y1=0.1, y2=0.9, x2=0.9)
 minimap() # all dots
 dev.off()
-berryFunctions::openFile("test.pdf")
+#berryFunctions::openFile("test.pdf")
 unlink("test.pdf")
 
 }
