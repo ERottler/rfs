@@ -1,13 +1,7 @@
-#' @title title
-#' @description description
-#' @details detailsMayBeRemoved
-#' @aliases aliasMayBeRemoved
-#' @return ReturnValue
-#' @section Warning: warningMayBeRemoved
+#' @title select Dates
+#' @description select rows within a given data range from a data.frame
+#' @return data.frame (selected rows)
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jun 2017
-#' @seealso \code{\link{help}}, \code{\link{help}}
-#' @keywords aplot
-# @importFrom package fun1 fun2
 #' @export
 #' @examples
 #' load(seasFolder("data/dismeta.Rdata"))
@@ -17,7 +11,6 @@
 #' @param y2,m2,d2 Ending year, month and day. DEFAULTS: 2010,1,1
 #' @param df    Dataframe with discharge records in columns. DEFAULT: dis
 #' @param logic Logical: return T/F vector: which rows of df are between a and b?
-# @param \dots Further arguments passed to \code{\link{plot}}
 #' 
 selectDates <- function(
 y1=1920,

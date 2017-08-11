@@ -2,8 +2,7 @@
 % Please edit documentation in R/selectDates.R
 \name{selectDates}
 \alias{selectDates}
-\alias{aliasMayBeRemoved}
-\title{title}
+\title{select Dates}
 \usage{
 selectDates(y1 = 1920, y2 = 2010, m1 = 1, d1 = 1, m2 = 1, d2 = 1,
   df = get("dis"), logic = FALSE)
@@ -18,27 +17,16 @@ selectDates(y1 = 1920, y2 = 2010, m1 = 1, d1 = 1, m2 = 1, d2 = 1,
 \item{logic}{Logical: return T/F vector: which rows of df are between a and b?}
 }
 \value{
-ReturnValue
+data.frame (selected rows)
 }
 \description{
-description
+select rows within a given data range from a data.frame
 }
-\details{
-detailsMayBeRemoved
-}
-\section{Warning}{
- warningMayBeRemoved
-}
-
 \examples{
 load(seasFolder("data/dismeta.Rdata"))
 str(selectDates(y1=2009)[,c(1,14:18)])
 
 }
-\seealso{
-\code{\link{help}}, \code{\link{help}}
-}
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, Jun 2017
 }
-\keyword{aplot}
