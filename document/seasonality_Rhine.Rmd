@@ -1,0 +1,98 @@
+---
+title: "Rhine flood seasonality computation"
+author: "Berry Boessenkool"
+date: "August 2017"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache=TRUE)
+```
+
+## Data
+
+Cologne Rhine gauge daily discharge 1823-10-31 until 2011-12-31.  
+`rfs`: rhine flood seasonality R package, [github.com/brry/rfs](https://github.com/brry/rfs#rfs)
+```{r data}
+library(rfs)
+load(seasFolder("data/dismeta.Rdata"))
+```
+
+
+## Annual Maxima
+
+Break between quasi-hydrological years is 117 days before Jan 1. 
+This is the point of minimum discharge amongst all analyzed Rhine gauges.
+
+```{r annmax}
+annual_max <- annualMax("date","Koeln", dis, shift=117)
+plot(as.numeric(names(annual_max)), annual_max, type="l", las=1, xlab="year")
+```
+
+## Extreme value analysis
+
+```{r eva}
+library(extremeStat)
+dle <- distLextreme(annual_max, gpd=FALSE)
+plotLextreme(dle, log=TRUE, nbest=8, main="Koeln 1823-2011")
+```
+
+## Computing return levels for given return periods.
+
+A value `x` in a time series has a certain expected frequency to occur or be exceeded: the exceedance probability Pe. 
+The Return Period (RP) of `x` can be computed as follows:
+
+$$ RP = \frac{1}{Pe} = \frac{1}{1-Pne} $$
+From that follows for the probability of non-exceedance (Pne):
+$$ Pne = 1 - \frac{1}{RP} $$
+The Return Level (RL) can be computed as 
+$$ RL = quantile(x, ~~ prob=Pne) $$
+
+Some common values are presented in the following table:
+```{r probs, echo=FALSE}
+RP <- c(1,1.112,2,5,10,20,50,100,200)
+knitr::kable(data.frame(RP, prob=round(1-1/RP,3)))
+```
+
+## Flood seasonality
+
+In classical extreme value analysis, the Block Maxima approach is often used.
+The extremes (maxima in blocks of e.g. years) are supposed to converge to the General Extreme Value distribution (GEV).
+Hence the GEV is fitted to the observations and the quantile function of the distribution used to get return levels.
+Often, hydrological years are used to ensure independence of the maxima.
+They split the year at a time when streamflow values tend to be small, e.g. in Germany at the end of October.
+
+To look at the seasonality of floods, we have a similar approach, albeit not with actual block extrema.
+Return levels are computed via the GEV for each day of the year (DOY) separately.
+As a reference, they are computed empirically with base R's `quantile` function with `type=8`.
+
+The computation and visualization is implemented in the `rfs` package:
+```{r cologne}
+load(seasFolder("data/dismeta.Rdata"))
+qdoy <- qdoyCompute("date", "Koeln", data=dis, shift=117) # 10 secs for full time series
+qdoyVis(qdoy, shift=117)
+```
+
+To compare the empirical and the GEV approach, an external pdf ([>click to open<](qdoy.pdf)) is generated with the following code.
+```{r cologne_pdf, results="hide"}
+distcomp <- function(dist, qd=qdoy, RPs=c(20,50,100), ...)
+{
+RPs <- paste0("RP.", sort(RPs))
+ciBand(qd[dist,RPs[3],],qd[dist,RPs[1],],qd[dist,RPs[2],], xaxs="i", ...)
+}
+library(berryFunctions) # for lim0
+
+pdf("qdoy.pdf", height=5)
+  par(mar=c(3,5,2,0.5), mgp=c(3.5,0.7,0))
+  qdoyVis(qdoy, ylim=lim0(10e3), shift=117, dist="empirical")
+  qdoyVis(qdoy, ylim=lim0(10e3), shift=117, dist="gev")
+  #
+  distcomp("empirical", xaxt="n", xlab="", main="Q20, Q50 and Q100 in Cologne, 1823-2011",
+         ylab="discharge  [m\U{00B3}/s]")
+  seasAxis(shift=117)
+  distcomp("gev", add=TRUE, colm=4)
+  legend("topright", c("empirical", "gev"), fill=c(3,4))
+dev.off()
+```
+
+
