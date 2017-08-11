@@ -3,14 +3,14 @@
 #' \url{https://github.com/brry/berryFunctions/blob/master/R/seasonality.R}
 #' @return Matrix for each DOY and quantile
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jun 2017
-#' @seealso \code{\link{qdoyVis}}, \code{\link{qdoyPeriods}}
+#' @seealso \code{\link{qdoyVis}}, \code{\link{qdoyPeriods}}, \code{\link{rfs-package}}
 #' @keywords ts chron
 #' @importFrom berryFunctions l2array getColumn
 #' @importFrom pbapply pblapply
 #' @importFrom extremeStat distLextreme
 #' @export
 #' @examples
-#' # see qdoyVis
+#' # see   ?rfs-package
 #' 
 #' @param dates    Dates in ascending order.
 #'                 Can be charater strings or \code{\link{strptime}} results,

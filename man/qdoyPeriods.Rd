@@ -30,22 +30,11 @@ Quantiles per DOY for several time periods.
 Enables analysis of seasonality changes over time.
 }
 \examples{
-\dontrun{
-load(seasFolder("data/dismeta.Rdata"))
-qdoy <- qdoyPeriods("Koeln") # 3x3 seconds
-str(qdoy)
-qdoy <- list(Koeln=qdoy, Mainz=qdoyPeriods("Mainz", progbar=FALSE))
-qdoyVisPeriods("Koeln", qdoy)
-qdoyVisPeriods("Mainz", qdoy)
-qdoyVisPeriods("Mainz", qdoy, sd=3)
-
-qdoyNA <- list(Oberriet_Blatten=qdoyPeriods("Oberriet_Blatten", progbar=FALSE))
-qdoyVisPeriods("Oberriet_Blatten", qdoyNA)
-}
+# see   ?rfs-package
 
 }
 \seealso{
-\code{\link{qdoyCompute}}, \code{\link{qdoyVis}}
+\code{\link{qdoyCompute}}, \code{\link{qdoyVis}}, \code{\link{rfs-package}}
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, Jun 2017

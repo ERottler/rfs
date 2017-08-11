@@ -1,16 +1,50 @@
 #' @title Rhine flood seasonality
-#' 
 #' @description Rhine flood seasonality analysis.
 #' PhD project by Berry Boessenkool.
-#' ToDo: add more info here
-#' 
+#' The main functions are introduced in the examples below.
 #' @name rfs
 #' @aliases rfs-package rfs
 #' @docType package
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, 2017
 #' @keywords package documentation
+#' @examples 
+#' 
+#' # qdoyCompute aggregates streamflow values per day of the year (doy)
+#' # The first examples require the original data to be in seasFolder.
+#' # Unfortunately, we are not allowed to make it publicly available.
+#' # Please contact berry-b@gmx.de if you need the raw data. 
+#' 
+#' load(seasFolder("data/dismeta.Rdata"))
+#' dd <- selectDates(1990,2010, df=dis)[,c("date","Koeln")]
+#' qdoy <- qdoyCompute("date", "Koeln", data=dd, shift=117) # 2 secs
+#' str(qdoy)
+#' 
+#' # Visualize the result:
+#' qdoyVis(qdoy, shift=117)
+#' qdoyVis(qdoy, main="Cologne 1990-2010", RPs=50, cols=4, ylim=c(2e3,10e3), shift=117, lab=0)
+#' qdoyVis(qdoy, dist="empirical", RPs=50, cols=3, add=TRUE, lab=0)
+#' legend("topright", c("empirical", "gev"), col=3:4, lwd=3)
+#' 
+#' # qdoyPeriods computes the aggregates for separate periods. 
+#' # This procedure was applied to 55 stations at large streams and rivers.
+#' # (see source code rfs-package.R)
+#' # The result is stored in this package, see   ?seas
+#' 
+#' # Elements from that list can be visualized as follows:
+#' qdoyVisPeriods("Rekingen")
+#' 
+#' # You can visualize your own data split up in periods with
+#' qdoy <- qdoyPeriods("Koeln") # 3x3 seconds
+#' str(qdoy)
+#' qdoyVisPeriods("Koeln", list(Koeln=qdoy))
+#' 
+#' # By default, the package dataset "seas" will be used:
+#' qdoyVisPeriods("Mainz")
+#' qdoyVisPeriods("Mainz", sd=3) # for smoothing
+#' 
+#' qdoyVisPeriods("Oberriet_Blatten") # can handle NAs
+#' 
 NULL
-
 
 #' @title seas - streamflow aggregates
 #' @description seas: A dataset with streamflow aggregates for seasonality analysis

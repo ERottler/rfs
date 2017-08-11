@@ -2,20 +2,12 @@
 #' @description  Visualize seasonality of discharge via quantile per DOY.
 #' @return Nothing, only plots
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jul 2017
-#' @seealso \code{\link{qdoyCompute}}, \code{\link{qdoyVisPeriods}}
+#' @seealso \code{\link{qdoyCompute}}, \code{\link{qdoyVisPeriods}}, \code{\link{rfs-package}}
 #' @keywords aplot
 #' @importFrom berryFunctions lim0
 #' @export
 #' @examples
-#' load(seasFolder("data/dismeta.Rdata"))
-#' dd <- selectDates(1990,2010, df=dis)[,c("date","Koeln")]
-#' qdoy <- qdoyCompute("date", "Koeln", data=dd, shift=117) # 2 secs
-#' str(qdoy)
-#' qdoyVis(qdoy, shift=117)
-#' 
-#' qdoyVis(qdoy, main="Cologne 1990-2010", RPs=50, cols=4, ylim=c(2e3,10e3), shift=117, lab=0)
-#' qdoyVis(qdoy, dist="empirical", RPs=50, cols=3, add=TRUE, lab=0)
-#' legend("topright", c("empirical", "gev"), col=3:4, lwd=3)
+#' # see   ?rfs-package
 #' 
 #' @param qd    Object returned by \code{\link{qdoyCompute}}
 #' @param dist  Distribution function: gev or empirical. DEFAULT: "gev"

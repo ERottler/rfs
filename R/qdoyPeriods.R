@@ -3,23 +3,12 @@
 #' Enables analysis of seasonality changes over time.
 #' @return 3d array for each doy, quantile and period
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jun 2017
-#' @seealso \code{\link{qdoyCompute}}, \code{\link{qdoyVis}}
+#' @seealso \code{\link{qdoyCompute}}, \code{\link{qdoyVis}}, \code{\link{rfs-package}}
 #' @keywords ts chron
 #' @importFrom berryFunctions l2array
 #' @export
 #' @examples
-#' \dontrun{
-#' load(seasFolder("data/dismeta.Rdata"))
-#' qdoy <- qdoyPeriods("Koeln") # 3x3 seconds
-#' str(qdoy)
-#' qdoy <- list(Koeln=qdoy, Mainz=qdoyPeriods("Mainz", progbar=FALSE))
-#' qdoyVisPeriods("Koeln", qdoy)
-#' qdoyVisPeriods("Mainz", qdoy)
-#' qdoyVisPeriods("Mainz", qdoy, sd=3)
-#' 
-#' qdoyNA <- list(Oberriet_Blatten=qdoyPeriods("Oberriet_Blatten", progbar=FALSE))
-#' qdoyVisPeriods("Oberriet_Blatten", qdoyNA)
-#' }
+#' # see   ?rfs-package
 #' 
 #' @param name       Character: Name of gauge to be analyzed, see \code{\link{gnames}}
 #' @param disdf      Dataframe with columns "date" and \code{name}. DEFAULT: dis

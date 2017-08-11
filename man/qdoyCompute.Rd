@@ -35,11 +35,11 @@ Quantiles per Day of Year (doy), basically forked from
 \url{https://github.com/brry/berryFunctions/blob/master/R/seasonality.R}
 }
 \examples{
-# see qdoyVis
+# see   ?rfs-package
 
 }
 \seealso{
-\code{\link{qdoyVis}}, \code{\link{qdoyPeriods}}
+\code{\link{qdoyVis}}, \code{\link{qdoyPeriods}}, \code{\link{rfs-package}}
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, Jun 2017
