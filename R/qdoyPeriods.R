@@ -47,7 +47,7 @@ if(sans1999) seldat[format(seldat$date,"%Y")=="1999",2] <- NA
 out <- lapply(seq_along(time[-1]), function(step){
   sdi <- selectDates(time[step], time[step+1], df=seldat)
   if(nrow(sdi)<1) sdi <- data.frame(date=Sys.Date()+1:10, emptystat=-1)
-  qdoyCompute(sdi$date, sdi[,2], quiet=TRUE, shift=shift, RPs=RPs, ...)
+  qdoyCompute(sdi$date, sdi[,2], shift=shift, RPs=RPs, ...)
   })
 out <- l2array(out)
 names(dimnames(out))[4] <- "Period"
