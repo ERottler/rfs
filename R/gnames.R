@@ -21,7 +21,8 @@
 gnames <- function(
 large=FALSE,
 rhine=FALSE,
-poster=FALSE
+poster=FALSE,
+paper=FALSE
 )
 {
 trueargs <- c(large,rhine,poster)
@@ -50,6 +51,9 @@ if(poster)
 return(c("Cochem","Frankfurt","Rockenau",
          "Basel_Rheinhalle","Rekingen","Diepoldsau",
          "Maxau","Worms","Mainz"))
+
+if(paper)
+return(c("Rekingen","Cochem","Mainz","Koeln"))
 
 # All names in alphabetical order:
 # load("data/dismeta.Rdata")  ;  dput(meta$name)

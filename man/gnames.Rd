@@ -4,7 +4,7 @@
 \alias{gnames}
 \title{gauge names}
 \usage{
-gnames(large = FALSE, rhine = FALSE, poster = FALSE)
+gnames(large = FALSE, rhine = FALSE, poster = FALSE, paper = FALSE)
 }
 \arguments{
 \item{large, rhine, poster}{Logical: return only a subset of the gauge names? DEFAULT: FALSE}
