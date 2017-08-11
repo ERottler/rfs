@@ -2,20 +2,21 @@
 #' @description Visualize seasonality changes: compare periods
 #' @return Nothing?
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jun 2017
-#' @seealso \code{\link{qdoyPeriods}}, \code{\link{qdoyCompute}}
+#' @seealso \code{\link{qdoyPeriods}}, \code{\link{qdoyCompute}}, \code{\link{rfs-package}}
 #' @keywords hplot
 #' @importFrom graphics abline box lines par title
 #' @importFrom berryFunctions seqPal lim0 pretty2 colPointsLegend monthLabs textField
 #' @export
 #' @examples
-#' # see qdoyPeriods
+#' # see   ?rfs-package
 #' 
 #' @param name        Gauge station name
 #' @param seaslist    Named list as e.g. returned by \code{lapply(SOMENAMES, qdoyPeriods)}
+#'                    DEFAULT: \code{\link{seas}}
 #' @param qdp         Array with qualtiles per doy and period as retuned by
 #'                    \code{\link{qdoyPeriods}}. DEFAULT: \code{seaslist[[name]]}
 #' @param dist        Distribution function: gev or empirical. DEFAULT: "gev"
-#' @param metadf      Dataframe with metadata. DEFAULT: meta
+#' @param metadf      Dataframe with metadata. DEFAULT: \code{\link{meta}}
 #' @param steps,RPs   Which of the periods and quantiles should be plotted?
 #'                    DEFAULT: 1:3 (all of them), c(1.111,2,10,50,200)
 #' @param sd          Smoothing degree, see \code{\link{smoothFFT}}.
@@ -38,7 +39,7 @@
 #' 
 qdoyVisPeriods <- function(
 name,
-seaslist,
+seaslist=get("seas"),
 qdp=seaslist[[name]],
 dist="gev",
 metadf=get("meta"),

@@ -4,9 +4,9 @@
 \alias{qdoyVisPeriods}
 \title{Visualize seasonality changes}
 \usage{
-qdoyVisPeriods(name, seaslist, qdp = seaslist[[name]], dist = "gev",
-  metadf = get("meta"), steps = 1:3, RPs = c(1.111, 2, 10, 100),
-  sd = -1, map = TRUE, axis = TRUE, legend = TRUE, x1 = 0.65,
+qdoyVisPeriods(name, seaslist = get("seas"), qdp = seaslist[[name]],
+  dist = "gev", metadf = get("meta"), steps = 1:3, RPs = c(1.111, 2, 10,
+  100), sd = -1, map = TRUE, axis = TRUE, legend = TRUE, x1 = 0.65,
   x2 = 0.95, y1 = 0.85, y2 = 1, text = TRUE, mar = c(1.8, 3.2, 3,
   0.2), ylim = NA, cex.axis = 1, boxcol = 1, boxlwd = 1, maincex = 1,
   mainline = NA, mainadj = 0.35, mainsep = "\\n", xticks.lwd = 1,
@@ -15,14 +15,15 @@ qdoyVisPeriods(name, seaslist, qdp = seaslist[[name]], dist = "gev",
 \arguments{
 \item{name}{Gauge station name}
 
-\item{seaslist}{Named list as e.g. returned by \code{lapply(SOMENAMES, qdoyPeriods)}}
+\item{seaslist}{Named list as e.g. returned by \code{lapply(SOMENAMES, qdoyPeriods)}
+DEFAULT: \code{\link{seas}}}
 
 \item{qdp}{Array with qualtiles per doy and period as retuned by
 \code{\link{qdoyPeriods}}. DEFAULT: \code{seaslist[[name]]}}
 
 \item{dist}{Distribution function: gev or empirical. DEFAULT: "gev"}
 
-\item{metadf}{Dataframe with metadata. DEFAULT: meta}
+\item{metadf}{Dataframe with metadata. DEFAULT: \code{\link{meta}}}
 
 \item{steps, RPs}{Which of the periods and quantiles should be plotted?
 DEFAULT: 1:3 (all of them), c(1.111,2,10,50,200)}
@@ -64,11 +65,11 @@ Nothing?
 Visualize seasonality changes: compare periods
 }
 \examples{
-# see qdoyPeriods
+# see   ?rfs-package
 
 }
 \seealso{
-\code{\link{qdoyPeriods}}, \code{\link{qdoyCompute}}
+\code{\link{qdoyPeriods}}, \code{\link{qdoyCompute}}, \code{\link{rfs-package}}
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, Jun 2017
