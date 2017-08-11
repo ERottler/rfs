@@ -5,7 +5,8 @@
 #' With the optional arguments, subsets can be chosen:\cr
 #' large: 55 gauges at large streams\cr
 #' rhine: 12 gauges along the actual Rhine river\cr
-#' poster: 9 regime-representative gauges
+#' poster: 9 regime-representative gauges\cr
+#' paper: 4 gauges selescted to be in the scientific article\cr
 #' 
 #' @return Vector with names (charstrings)
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jun 2017
@@ -15,7 +16,7 @@
 #' @examples
 #' gnames()
 #' 
-#' @param large,rhine,poster  Logical: return only a subset of the gauge names? DEFAULT: FALSE
+#' @param large,rhine,poster,paper  Logical: return only a subset of the gauge names? DEFAULT: FALSE
 # @param \dots Further arguments passed to \code{\link{plot}}
 #' 
 gnames <- function(
@@ -25,9 +26,9 @@ poster=FALSE,
 paper=FALSE
 )
 {
-trueargs <- c(large,rhine,poster)
+trueargs <- c(large,rhine,poster,paper)
 if(sum(trueargs)>1) stop("only one of the arguments may be TRUE, not ",
-                                      paste(c("large","rhine","poster")[trueargs], collapse=" & "))
+                                      paste(c("large","rhine","poster","paper")[trueargs], collapse=" & "))
 
 if(large) ###dput(sortDF(meta[meta$Q100>400,], "Q100")$name)
 return( c("Lobith", "Rees", "Ruhrort", "Duesseldorf", "Koeln", "Bonn", "Andernach",

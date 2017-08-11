@@ -7,7 +7,7 @@
 gnames(large = FALSE, rhine = FALSE, poster = FALSE, paper = FALSE)
 }
 \arguments{
-\item{large, rhine, poster}{Logical: return only a subset of the gauge names? DEFAULT: FALSE}
+\item{large, rhine, poster, paper}{Logical: return only a subset of the gauge names? DEFAULT: FALSE}
 }
 \value{
 Vector with names (charstrings)
@@ -18,7 +18,8 @@ The default is to return all 196 names in alphabetical order.
 With the optional arguments, subsets can be chosen:\cr
 large: 55 gauges at large streams\cr
 rhine: 12 gauges along the actual Rhine river\cr
-poster: 9 regime-representative gauges
+poster: 9 regime-representative gauges\cr
+paper: 4 gauges selescted to be in the scientific article\cr
 }
 \examples{
 gnames()
