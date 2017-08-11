@@ -22,6 +22,8 @@
 #' @param RPs      Return periods for \code{extremeStat::\link[extremeStat]{distLextreme}}
 #'                 DEFAULT: \code{\link{RPvals}}
 #' @param progbar  Logical: show progress bar? DEFAULT: TRUE
+#' @param negative2NA Logical: change negative values for RP1 for GEV to NA?
+#'                 This can be useful if values must be strictly positive. DEFAULT: FALSE
 #' 
 qdoyCompute <- function(
 dates,
@@ -29,7 +31,8 @@ values,
 data,
 shift=0,
 RPs=RPvals,
-progbar=TRUE
+progbar=TRUE,
+negative2NA=FALSE
 )
 {
 # input columns or vectors
@@ -56,5 +59,6 @@ RL <- l2array(RL)
 names(dimnames(RL)) <- c("dist","rl","doy")
 dimnames(RL)[[2]] <- c(paste0("RP.", RPs), "RMSE")
 dimnames(RL)[[3]] <- 1:366
+if(negative2NA) RL["gev","RP.1",RL["gev","RP.1",]<0] <- NA
 RL
 }

@@ -4,7 +4,8 @@
 \alias{qdoyCompute}
 \title{Quantile estimation per DOY}
 \usage{
-qdoyCompute(dates, values, data, shift = 0, RPs = RPvals, progbar = TRUE)
+qdoyCompute(dates, values, data, shift = 0, RPs = RPvals, progbar = TRUE,
+  negative2NA = FALSE)
 }
 \arguments{
 \item{dates}{Dates in ascending order.
@@ -22,6 +23,9 @@ E.g. shift=61 for German hydrological year (Nov to Oct). DEFAULT: 0}
 DEFAULT: \code{\link{RPvals}}}
 
 \item{progbar}{Logical: show progress bar? DEFAULT: TRUE}
+
+\item{negative2NA}{Logical: change negative values for RP1 for GEV to NA?
+This can be useful if values must be strictly positive. DEFAULT: FALSE}
 }
 \value{
 Matrix for each DOY and quantile
