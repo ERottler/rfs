@@ -2,15 +2,16 @@
 #' 
 #' Get annual maxima from time series
 #' 
-#' @return named numeric vector
+#' @return data.frame with numerical columns "year" and "max". 
+#' The rownames are character strings with the year.
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jun 2017
 #' @seealso \code{\link{qdoyCompute}}
 #' @export
 #' @examples
 #' load(seasFolder("data/dismeta.Rdata"))
-#' annual_max <- annualMax("date","Koeln", dis)
-#' head(data.frame(annual_max))
-#' plot(as.numeric(names(annual_max)), annual_max, type="l", las=1, xlab="year")
+#' annmax <- annualMax("date","Koeln", dis)
+#' head(annmax)
+#' plot(annmax, type="l", las=1, xlab="year")
 #' 
 #' head(annualMax("date","Koeln", dis))
 #' head(annualMax("date","Koeln", dis, shift=117)) # hydrological year
@@ -52,6 +53,8 @@ dates <- dates + shift
 # axis values
 year <- as.numeric(format(dates,"%Y"))
 mymax <- function(xx) if(all(is.na(xx))) NA else max(xx, na.rm=TRUE)
-tapply(X=values, INDEX=year, FUN=mymax)
+out <- tapply(X=values, INDEX=year, FUN=mymax)
+out <- data.frame(year=as.numeric(names(out)), max=out)
+out
 }
 

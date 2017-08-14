@@ -21,16 +21,17 @@ E.g. shift=61 for German hydrological year (Nov to Oct). DEFAULT: 0}
 \item{\dots}{Further arguments passed to \code{\link{colPoints}}}
 }
 \value{
-named numeric vector
+data.frame with numerical columns "year" and "max". 
+The rownames are character strings with the year.
 }
 \description{
 Get annual maxima from time series
 }
 \examples{
 load(seasFolder("data/dismeta.Rdata"))
-annual_max <- annualMax("date","Koeln", dis)
-head(data.frame(annual_max))
-plot(as.numeric(names(annual_max)), annual_max, type="l", las=1, xlab="year")
+annmax <- annualMax("date","Koeln", dis)
+head(annmax)
+plot(annmax, type="l", las=1, xlab="year")
 
 head(annualMax("date","Koeln", dis))
 head(annualMax("date","Koeln", dis, shift=117)) # hydrological year

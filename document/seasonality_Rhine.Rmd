@@ -26,14 +26,14 @@ This is the point of minimum discharge amongst all analyzed Rhine gauges.
 
 ```{r annmax}
 annual_max <- annualMax("date","Koeln", dis, shift=117)
-plot(as.numeric(names(annual_max)), annual_max, type="l", las=1, xlab="year")
+plot(annual_max, type="l", las=1, xlab="year")
 ```
 
 ## Extreme value analysis
 
 ```{r eva}
 library(extremeStat)
-dle <- distLextreme(annual_max, gpd=FALSE)
+dle <- distLextreme(annual_max$max, gpd=FALSE)
 plotLextreme(dle, log=TRUE, nbest=8, main="Koeln 1823-2011")
 ```
 
