@@ -4,7 +4,8 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jul 2017
 #' @seealso \code{\link{qdoyCompute}}, \code{\link{qdoyVisPeriods}}, \code{\link{rfs-package}}
 #' @keywords aplot
-#' @importFrom berryFunctions lim0
+#' @importFrom berryFunctions lim0 textField
+#' @importFrom graphics lines plot
 #' @export
 #' @examples
 #' # see   ?rfs-package

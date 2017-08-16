@@ -4,7 +4,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jun 2017
 #' @seealso \code{\link{qdoyPeriods}}, \code{\link{qdoyCompute}}, \code{\link{rfs-package}}
 #' @keywords hplot
-#' @importFrom graphics abline box lines par title
+#' @importFrom graphics abline box lines par title axis plot
 #' @importFrom berryFunctions seqPal lim0 pretty2 colPointsLegend monthLabs textField
 #' @export
 #' @examples

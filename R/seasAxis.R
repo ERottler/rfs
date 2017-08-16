@@ -7,8 +7,8 @@
 #' @seealso \code{\link{qdoyVis}}
 #' @keywords aplot
 #' @export
-#' @importFrom berryFunctions owa
-#' @importFrom graphics axis
+#' @importFrom berryFunctions owa monthLabs
+#' @importFrom graphics axis abline
 #' @examples
 #' plot(1:366, xaxt="n", xaxs="i")
 #' seasAxis(shift=117)

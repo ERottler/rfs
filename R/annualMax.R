@@ -6,6 +6,7 @@
 #' The rownames are character strings with the year.
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jun 2017
 #' @seealso \code{\link{qdoyCompute}}
+#' @importFrom berryFunctions getColumn
 #' @export
 #' @examples
 #' load(seasFolder("data/dismeta.Rdata"))
