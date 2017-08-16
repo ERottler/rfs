@@ -65,6 +65,16 @@ NULL
 #' head(meta[,c(3,4,6,22:28)])
 "meta"
 
+#' @title Europe borders map
+#' @description map: A dataset with borders of European countries used in the 
+#'              \code{\link{rfsApp}}
+#' @format SpatialPolygonsDataFrame
+#' @docType data
+#' @examples
+#' str(map@data)
+"map"
+
+
 
 # Data inclusion in package ----
 if(FALSE){
@@ -103,5 +113,13 @@ tools::resaveRdaFiles("data/seas.rda") # from 5.7 to 4.8 MB
 # meta data:
 save(meta,       file="data/meta.rda")
 tools::resaveRdaFiles("data/meta.rda") 
+
+
+# install.packages(c("rworldmap", "rworldxtra"))
+map <- rworldmap::getMap("high")
+map <- map[map$ISO3 %in% c("CZE","POL","DEU","NLD","BEL","LUX","FRA","CHE",
+                           "LIE","ITA","AUT","SVN","SVK","HUN","HRV","BIH"),]
+save(map,        file="data/map.rda")
+tools::resaveRdaFiles("data/map.rda") 
 
 } # end if(FALSE)
