@@ -122,4 +122,43 @@ map <- map[map$ISO3 %in% c("CZE","POL","DEU","NLD","BEL","LUX","FRA","CHE",
 save(map,        file="data/map.rda")
 tools::resaveRdaFiles("data/map.rda") 
 
+
+devtools::install_github("brry/OSMscale")
+devtools::install_github("brry/berryFunctions")
+devtools::install_github("brry/extremeStat")
+devtools::install_github("brry/rfs")
+
+rsconnect::deployApp('inst/shinyapp', appName="rhine")
+#
+#Error: Unable to retrieve package records for the following packages:
+#- "OSMscale", "berryFunctions", "extremeStat", "rfs"
+# https://github.com/rstudio/rsconnect/issues/189
+
+
+# Preparing to deploy application...DONE
+# Uploading bundle for application: 205333...
+# Detecting system locale ... de_DE
+# DONE
+# Deploying bundle: 943172 for application: 205333 ...
+# Waiting for task: 476281349
+#   building: Parsing manifest
+#   building: Building image: 936907
+#   building: Installing system dependencies
+#   building: Fetching packages
+#   building: Building package: Renext
+#   building: Building package: evir
+#   building: Building package: berryFunctions
+#   building: Building package: fExtremes
+#   building: Building package: ismev
+#   building: Building package: extremeStat
+#   building: Building package: rfs
+#   building: Building package: OpenStreetMap
+#   building: Building package: OSMscale
+#   building: Installing files
+#   building: Pushing image: 936907
+#   deploying: Starting instances
+#   rollforward: Activating new instances
+#   success: Stopping old instances
+# Application successfully deployed to https://brry.shinyapps.io/rhine/
+
 } # end if(FALSE)
