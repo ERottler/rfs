@@ -27,4 +27,5 @@ This app can also be run offline after installing this package (see above) with
 library(rfs)
 rfsApp()
 ```
+The [source code for the app](https://github.com/brry/rfs/blob/master/inst/shinyapp/app.R) is available within the package as well (in the `inst/shinyapp/` folder).
 
