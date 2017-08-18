@@ -4,7 +4,7 @@
 \alias{annualMax}
 \title{Annual maxima from time series}
 \usage{
-annualMax(dates, values, data, shift = 0)
+annualMax(dates, values, data, shift = 0, missing2NA = TRUE)
 }
 \arguments{
 \item{dates}{Dates in ascending order.
@@ -17,6 +17,9 @@ as accepted (and coerced) by \code{\link{as.Date}}}
 
 \item{shift}{Number of days to move the year-break to.
 E.g. shift=61 for German hydrological year (Nov to Oct). DEFAULT: 0}
+
+\item{missing2NA}{Logical. If years are completely missing in \code{dates},
+insert NA rows for those? DEFAULT: TRUE}
 }
 \value{
 data.frame with one row per (hydrological) year (h_year) with the columns:\cr
@@ -32,9 +35,21 @@ load(seasFolder("data/dismeta.Rdata"))
 annmax <- annualMax("date","Koeln", dis)
 head(annmax)
 plot(annmax[,1:2], type="l", las=1, xlab="year")
+plot(annmax$year, annmax$doy)
 
 head(annualMax("date","Koeln", dis))
 head(annualMax("date","Koeln", dis, shift=117)) # hydrological year
+berryFunctions::seasonality("date","Koeln", dis, shift=117)
+annmax <- annualMax("date","Koeln", dis, shift=117)
+berryFunctions::linReg(doy~year, data=annmax); abline(h=150)
+berryFunctions::linReg(doy~year, data=annmax[120:190,]); abline(h=150)
+# No real trend in timing of annual streamflow maximum in Cologne
+
+dis2 <- dis[dis$Koeln>9000,]
+head(annualMax("date","Koeln", dis2))
+head(annualMax("date","Koeln", dis2, missing2NA=FALSE))
+#View(dis[,c("date","Koeln")])
+plot(head(dis[,c("date","Koeln")], 500), type="l")
 
 }
 \seealso{
