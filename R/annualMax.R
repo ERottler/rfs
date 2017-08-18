@@ -25,14 +25,12 @@
 #' @param data     Optional: data.frame with the column names as given by dates and values
 #' @param shift    Number of days to move the year-break to.
 #'                 E.g. shift=61 for German hydrological year (Nov to Oct). DEFAULT: 0
-#' @param \dots    Further arguments passed to \code{\link{colPoints}}
 #' 
 annualMax <- function(
   dates,
   values,
   data,
-  shift=0,
-  ...
+  shift=0
 )
 {
 # input columns or vectors

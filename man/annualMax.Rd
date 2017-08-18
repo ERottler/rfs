@@ -4,7 +4,7 @@
 \alias{annualMax}
 \title{Annual maxima from time series}
 \usage{
-annualMax(dates, values, data, shift = 0, ...)
+annualMax(dates, values, data, shift = 0)
 }
 \arguments{
 \item{dates}{Dates in ascending order.
@@ -17,8 +17,6 @@ as accepted (and coerced) by \code{\link{as.Date}}}
 
 \item{shift}{Number of days to move the year-break to.
 E.g. shift=61 for German hydrological year (Nov to Oct). DEFAULT: 0}
-
-\item{\dots}{Further arguments passed to \code{\link{colPoints}}}
 }
 \value{
 data.frame with one row per (hydrological) year (h_year) with the columns:\cr
