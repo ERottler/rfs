@@ -11,11 +11,13 @@
 #' @export
 #' @examples
 #' # rfsApp()
+#' @param app   Folder specifying which app to run. 
+#'              DEFAULT: "rhine" (the main seasonality change app)
 #' @param \dots Arguments passed to \code{shiny::\link[shiny]{runApp}}
 #'
-rfsApp <- function(...)
+rfsApp <- function(app="rhine", ...)
 {
-appDir <- system.file("shinyapp", package="rfs")
-if(appDir=="") stop("Could not find shinyapp directory. Try re-installing `rfs`.", call.=FALSE)
+appDir <- system.file("shinyapps", app, package="rfs")
+if(appDir=="") stop("Could not find shinyapp directory. Try re-installing 'rfs'.", call.=FALSE)
 shiny::runApp(appDir, ...)
 }

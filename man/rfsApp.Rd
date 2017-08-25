@@ -4,9 +4,12 @@
 \alias{rfsApp}
 \title{Launch interactive data analysis}
 \usage{
-rfsApp(...)
+rfsApp(app = "rhine", ...)
 }
 \arguments{
+\item{app}{Folder specifying which app to run. 
+DEFAULT: "rhine" (the main seasonality change app)}
+
 \item{\dots}{Arguments passed to \code{shiny::\link[shiny]{runApp}}}
 }
 \description{
