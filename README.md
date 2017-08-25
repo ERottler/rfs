@@ -4,6 +4,11 @@ PhD project by Berry Boessenkool, <berry-b@gmx.de>.
 
 ### install
 
+On Linux, you may need to manually install `fftw3` for the `fftw` package in the terminal:
+```
+sudo apt-get install fftw3 fftw3-dev pkg-config
+```
+For the actual installation of `rfs`, use (within R):
 ```R
 install.packages("berryFunctions")
 berryFunctions::instGit("brry/berryFunctions")

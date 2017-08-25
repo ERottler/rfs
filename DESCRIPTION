@@ -9,3 +9,4 @@ Imports: berryFunctions (>= 1.15.17), pbapply, extremeStat (>= 1.3.5), png, fftw
 License: GPL(>=2)
 LazyData: true
 RoxygenNote: 6.0.1
+BugReports: https://github.com/brry/rfs/issues
