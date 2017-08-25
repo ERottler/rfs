@@ -16,19 +16,20 @@
 #' @examples
 #' gnames()
 #' 
-#' @param large,rhine,poster,paper  Logical: return only a subset of the gauge names? DEFAULT: FALSE
+#' @param large,rhine,poster,paper,trend  Logical: return only a subset of the gauge names? DEFAULT: FALSE
 # @param \dots Further arguments passed to \code{\link{plot}}
 #' 
 gnames <- function(
 large=FALSE,
 rhine=FALSE,
 poster=FALSE,
-paper=FALSE
+paper=FALSE,
+trend=FALSE
 )
 {
-trueargs <- c(large,rhine,poster,paper)
+trueargs <- c(large,rhine,poster,paper,trend)
 if(sum(trueargs)>1) stop("only one of the arguments may be TRUE, not ",
-                                      paste(c("large","rhine","poster","paper")[trueargs], collapse=" & "))
+                                      paste(c("large","rhine","poster","paper","trend")[trueargs], collapse=" & "))
 
 if(large) ###dput(sortDF(meta[meta$Q100>400,], "Q100")$name)
 return( c("Lobith", "Rees", "Ruhrort", "Duesseldorf", "Koeln", "Bonn", "Andernach",
@@ -43,6 +44,15 @@ return( c("Lobith", "Rees", "Ruhrort", "Duesseldorf", "Koeln", "Bonn", "Andernac
 "Frankfurt", "Kleinheubach", "Steinbach", "Wuerzburg", "Schweinfurt", "Pettstadt", "Kemmern", "Schwuerbitz",
 "Rockenau", "Lauffen", "Plochingen", "Horb_Neckar",
 "Pforzheim_Enz", "Bad_Rotenfels", "Schwaibach", "Halden"))
+
+
+if(trend) 
+return( c("Lobith", "Rees", "Ruhrort", "Duesseldorf", "Koeln", "Bonn", "Andernach",
+"Kaub", "Mainz", "Worms", "Speyer", "Maxau", "Basel_Rheinhalle", "Rekingen", "Neuhausen", "Diepoldsau", 
+"Cochem", "Trier_Up", "Bollendorf", "Fremersdorf",
+"Frankfurt", "Kleinheubach", "Steinbach", "Wuerzburg", "Schweinfurt", "Pettstadt", "Kemmern", "Schwuerbitz",
+"Rockenau", "Lauffen", "Plochingen", "Horb_Neckar"))
+
 
 if(rhine)
 return(c("Diepoldsau","Rekingen","Basel_Rheinhalle","Maxau","Rockenau",
