@@ -2,9 +2,23 @@
 Rhine Flood Seasonality  
 PhD project by Berry Boessenkool, <berry-b@gmx.de>.
 
+Flood regimes along the Rhine river appear to be changing. 
+In the last decades, some snow-melt dominated floods have occured relatively early in the year, 
+for example in the Pentecost flood in 1999. 
+In tributary rivers where floods mostly stem from long rainfall events, 
+streamflow levels seem to be increasing.
+If these trends continue into the future, there may be a temporal overlap in 
+snow and rain floods, which may bring larger floods than ever in the middle Rhine, 
+where both regimes mix.
+
+This repository stores the code used for analyzing streamflow data with regard to the hypothesis outlined above.  
+The current status
+
 ### install
 
-On Linux, you may need to manually install `fftw3` for the `fftw` package in the terminal:
+The code comes in a standard [R](https://github.com/brry/course#slides) package. 
+
+On Linux, you may first need to manually install `fftw3` for the `fftw` package in the terminal:
 ```
 sudo apt-get install fftw3 fftw3-dev pkg-config
 ```
@@ -32,5 +46,5 @@ This app can also be run offline after installing this package (see above) with
 library(rfs)
 rfsApp()
 ```
-The [source code for the app](https://github.com/brry/rfs/blob/master/inst/shinyapp/app.R) is available within the package as well (in the `inst/shinyapp/` folder).
+The [source code for the app](https://github.com/brry/rfs/blob/master/inst/shinyapps/rhine/app.R) is available within the package as well (in the `inst/shinyapp/` folder).
 
