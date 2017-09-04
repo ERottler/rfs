@@ -16,23 +16,24 @@
 #' @examples
 #' gnames()
 #' 
-#' @param large,rhine,poster,paper,trend  Logical: return only a subset of the gauge names? DEFAULT: FALSE
+#' @param large,app,rhine,poster,paper,trend  Logical: return only a subset of the gauge names? DEFAULT: FALSE
 # @param \dots Further arguments passed to \code{\link{plot}}
 #' 
 gnames <- function(
 large=FALSE,
+app=FALSE,
 rhine=FALSE,
 poster=FALSE,
 paper=FALSE,
 trend=FALSE
 )
 {
-trueargs <- c(large,rhine,poster,paper,trend)
+trueargs <- c(large,app,rhine,poster,paper,trend)
 if(sum(trueargs)>1) stop("only one of the arguments may be TRUE, not ",
-                                      paste(c("large","rhine","poster","paper","trend")[trueargs], collapse=" & "))
+   paste(c("large","app","rhine","poster","paper","trend")[trueargs], collapse=" & "))
 
-if(large) ###dput(sortDF(meta[meta$Q100>400,], "Q100")$name)
-return( c("Lobith", "Rees", "Ruhrort", "Duesseldorf", "Koeln", "Bonn", "Andernach",
+###dput(sortDF(meta[meta$Q100>400,], "Q100")$name)
+lll <- c("Lobith", "Rees", "Ruhrort", "Duesseldorf", "Koeln", "Bonn", "Andernach",
 "Kaub", "Mainz", "Worms", "Speyer", "Maxau", "Basel_Rheinhalle", "Basel_Schifflaende",
 "Rheinfelden", "Rekingen", "Neuhausen", "Rheinklingen", "Diepoldsau", "Oberriet_Blatten",
 "Schermbeck_1", "Haltern", "Kesseler_3",
@@ -43,8 +44,10 @@ return( c("Lobith", "Rees", "Ruhrort", "Duesseldorf", "Koeln", "Bonn", "Andernac
 "Grolsheim", "Boos", "Martinstein",
 "Frankfurt", "Kleinheubach", "Steinbach", "Wuerzburg", "Schweinfurt", "Pettstadt", "Kemmern", "Schwuerbitz",
 "Rockenau", "Lauffen", "Plochingen", "Horb_Neckar",
-"Pforzheim_Enz", "Bad_Rotenfels", "Schwaibach", "Halden"))
+"Pforzheim_Enz", "Bad_Rotenfels", "Schwaibach", "Halden")
 
+if(large) return(lll)
+if(app) return(lll[-c(14,20)])
 
 if(trend) 
 return( c("Lobith", "Rees", "Ruhrort", "Duesseldorf", "Koeln", "Bonn", "Andernach",

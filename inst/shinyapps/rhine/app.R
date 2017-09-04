@@ -1,4 +1,4 @@
-
+# RHINE SEASONALITY CHANGE APP
 # Load package and data ----
 library(rfs)
 
@@ -9,7 +9,7 @@ server <- function(input, output) {
 sd_sel <- reactive(if(input$smooth) input$sd else -1)
 
 loc_sel <- reactive({
-m <- meta[gnames(large=TRUE),]
+m <- meta[gnames(app=TRUE),]
 loc <- "Lobith"
 if(!is.null(input$location)) loc <- input$location
 if(!is.null(input$plot_click)){
@@ -21,7 +21,7 @@ loc
 })
 
 output$location <- renderUI({selectInput("location", "Choose a location, or click on the map", 
-                choices=gnames(large=TRUE), selected=loc_sel())
+                choices=gnames(app=TRUE), selected=loc_sel())
 })
 
 
@@ -69,9 +69,9 @@ sp::plot(map, xlim=xlim, ylim=ylim, asp=1.4, col="grey80", border="white")
 rasterImage(dem, xleft= 5.11, ybottom=46.24-0.05,
                 xright=12.02,    ytop=52.04+0.07)
 OSMscale::scaleBar(omap, abslen=300, ndiv=3, x=0.5, y=0.95)
-sp::plot(map, add=TRUE, border="white")
+sp::plot(map, add=TRUE, border=addAlpha("white"))
 text(countries$x, countries$y, countries$country, cex=1.5, col="white")
-points(lat~lon, data=meta[gnames(large=TRUE),], pch=3, lwd=2, col="red")
+points(lat~lon, data=meta[gnames(app=TRUE),], pch=3, lwd=2, col="red")
 points(lat~lon, data=meta[loc_sel(),], cex=3, lwd=2, col="orange")
 })
 }

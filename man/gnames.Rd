@@ -4,11 +4,11 @@
 \alias{gnames}
 \title{gauge names}
 \usage{
-gnames(large = FALSE, rhine = FALSE, poster = FALSE, paper = FALSE,
-  trend = FALSE)
+gnames(large = FALSE, app = FALSE, rhine = FALSE, poster = FALSE,
+  paper = FALSE, trend = FALSE)
 }
 \arguments{
-\item{large, rhine, poster, paper, trend}{Logical: return only a subset of the gauge names? DEFAULT: FALSE}
+\item{large, app, rhine, poster, paper, trend}{Logical: return only a subset of the gauge names? DEFAULT: FALSE}
 }
 \value{
 Vector with names (charstrings)
