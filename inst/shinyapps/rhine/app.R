@@ -82,15 +82,22 @@ ui <- fixedPage(
   titlePanel("Streamflow seasonality changes along the Rhine river"),
   sidebarLayout(
     sidebarPanel(
+      a("App", href="https://github.com/brry/rfs/blob/master/inst/shinyapps/rhine/app.R"),
+      "by Berry Boessenkool,", a("berry-b@gmx.de", href="mailto:berry-b@gmx.de"),
+      br(),br(),
+      "Flood regimes along the Rhine river are changing, as described on the ", 
+      a("project homepage.", href="https://github.com/brry/rfs#rfs"), 
+      "This app enables an interactive analysis of long term records of several river flow gauges.",
+      br(),
       "For each day of the year in certain time periods (see the top right legend),",
-      "streamflow data are used. Their return periods are calculated with ",
-      "empirical or parametrical quantile estimators. For the latter, the general ",
-      "extreme value distribution (GEV) is fitted via L-moments.",
+      "the 30 values are aggregated with empirical or parametrical quantile estimators. ",
+      "For the latter, the general extreme value distribution (GEV) is fitted via L-moments.",
+      br(),br(),
       uiOutput("location"),
-      checkboxInput("smooth", "Apply FFT smoothing", value=FALSE),
+      checkboxInput("smooth", strong("Apply FFT smoothing"), value=FALSE),
       sliderInput("sd", "Degree of smoothing", min=1, max=10, value=3, step=0.1),
       radioButtons("dist", "Quantile estimator", choices=dimnames(seas[[1]])$dist[1:2]),
-      numericInput("ylim", "y axis limit (NA for automatic)", value=NA, min=0, max=20e3, step=500),
+      numericInput("ylim", "y axis limit (NA or empty for automatic)", value=NA, min=0, max=20e3, step=500),
       checkboxGroupInput("RPs", "Return periods", choices=RPvals, selected=c(1.111, 2, 10, 100))
     ),
     # Show seasonality change plot
