@@ -128,11 +128,11 @@ devtools::install_github("brry/berryFunctions")
 devtools::install_github("brry/extremeStat")
 devtools::install_github("brry/rfs")
 
-rsconnect::deployApp('inst/shinyapp', appName="rhine")
+rsconnect::deployApp('inst/shinyapps/rhine', appName="rhine")
 #
 #Error: Unable to retrieve package records for the following packages:
 #- "OSMscale", "berryFunctions", "extremeStat", "rfs"
-# https://github.com/rstudio/rsconnect/issues/189
+# https://github.com/rstudio/rsconnect/issues/189 # use install_github first
 
 
 # Preparing to deploy application...DONE

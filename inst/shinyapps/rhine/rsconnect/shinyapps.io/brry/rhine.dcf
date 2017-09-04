@@ -1,8 +1,12 @@
 name: rhine
 title:
+username:
 account: brry
 server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
 appId: 205333
-bundleId: 943172
+bundleId: 966699
 url: https://brry.shinyapps.io/rhine/
-when: 1502901618.16911
+when: 1504531150.28744
+asMultiple: FALSE
+asStatic: FALSE

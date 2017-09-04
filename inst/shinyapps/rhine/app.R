@@ -69,7 +69,7 @@ sp::plot(map, xlim=xlim, ylim=ylim, asp=1.4, col="grey80", border="white")
 rasterImage(dem, xleft= 5.11, ybottom=46.24-0.05,
                 xright=12.02,    ytop=52.04+0.07)
 OSMscale::scaleBar(omap, abslen=300, ndiv=3, x=0.5, y=0.95)
-sp::plot(map, add=TRUE, border=addAlpha("white"))
+sp::plot(map, add=TRUE, border=berryFunctions::addAlpha("white"))
 text(countries$x, countries$y, countries$country, cex=1.5, col="white")
 points(lat~lon, data=meta[gnames(app=TRUE),], pch=3, lwd=2, col="red")
 points(lat~lon, data=meta[loc_sel(),], cex=3, lwd=2, col="orange")
