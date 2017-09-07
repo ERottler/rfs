@@ -8,7 +8,7 @@
 minimap(name, x1 = 0.1, x2 = x1 + 0.2, y1 = 0.7, y2 = y1 + 0.27, ...)
 
 plotmap(name, metadf = meta, pch = 3, lwd = 3, col = "red",
-  allargs = NULL, expr = NULL, ...)
+  allargs = NULL, expr = NULL, label = FALSE, ...)
 }
 \arguments{
 \item{name}{Station name(s) to be plotted with red crosses}
@@ -24,6 +24,8 @@ plotmap(name, metadf = meta, pch = 3, lwd = 3, col = "red",
 \item{allargs}{List of arguments passed to all gauge locations first}
 
 \item{expr}{Expression to be executed after points, see example. DEFAULT: NULL}
+
+\item{label}{Logical (vector): Label gauges? DEFAULT: FALSE}
 }
 \value{
 None
@@ -32,13 +34,14 @@ None
 Plots DEM as (small inset) map with desired stations highlighted
 }
 \examples{
-plotmap("Koeln")
+plotmap("Koeln") ; axis(1) ; axis(2)
+plotmap(c("Rees","Mainz","Worms","Seifen"), label=TRUE, col=1:4)
 plot(1:10)
 minimap("Koeln")
 minimap(0) # no stations
 minimap("Cochem", allargs=list(pch=3,cex=0.5))
 
-stats <- gnames(app=TRUE)[c(1,5,8,12)]#' 
+stats <- gnames("app")[c(1,5,8,12)]
 minimap(stats, expr=text(meta[name,"lon"], meta[name,"lat"], name, col=2, adj=c(0,1)))
 
 pdf("test.pdf", height=5)

@@ -6,10 +6,11 @@
 #' @keywords hplot
 #' @importFrom png readPNG
 #' @importFrom berryFunctions checkFile smallPlot
-#' @importFrom graphics plot rasterImage points
+#' @importFrom graphics plot rasterImage points text
 #' @export
 #' @examples
 #' plotmap("Koeln") ; axis(1) ; axis(2)
+#' plotmap(c("Rees","Mainz","Worms","Seifen"), label=TRUE, col=1:4)
 #' plot(1:10)
 #' minimap("Koeln")
 #' minimap(0) # no stations
@@ -32,6 +33,7 @@
 #' @param pch,lwd,col Point properties
 #' @param allargs     List of arguments passed to all gauge locations first
 #' @param expr        Expression to be executed after points, see example. DEFAULT: NULL
+#' @param label       Logical (vector): Label gauges? DEFAULT: FALSE
 #' @param \dots       Further arguments passed to \code{plotmap} and then to \code{\link{points}}
 #' 
 minimap <- function(
@@ -55,6 +57,7 @@ plotmap <- function(
  col="red",
  allargs=NULL,        # list of arguments passed to all points first
  expr=NULL,
+ label=FALSE,         # Label gauges?
  ...
  )
 {
@@ -67,6 +70,10 @@ rasterImage(png::readPNG(dempath),
                      xright=12.02,   ytop=52.04+0.07)
 if(!is.null(allargs)) do.call(points, c(list(x=meta$lon, y=meta$lat), allargs))
 points(lat~lon, data=meta[name,], pch=pch, lwd=lwd, col=col, ...)
+lmeta <- meta[name,][label,]
+if(any(label)) text(lmeta$lon, lmeta$lat, sub("_Rheinhalle","",lmeta$name),
+                    col=col, adj=c(-0.1,1.1) )
+
 eval(substitute(expr))
 invisible()
 }
