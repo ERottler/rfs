@@ -2,34 +2,37 @@
 % Please edit documentation in R/minimap.R
 \name{minimap}
 \alias{minimap}
+\alias{plotmap}
 \title{DEM plotting function}
 \usage{
-minimap(name, metadf = meta, x1 = 0.1, x2 = x1 + 0.2, y1 = 0.7,
-  y2 = y1 + 0.27, pch = 3, lwd = 3, col = "red", allargs = NULL,
-  expr = NULL, ...)
+minimap(name, x1 = 0.1, x2 = x1 + 0.2, y1 = 0.7, y2 = y1 + 0.27, ...)
+
+plotmap(name, metadf = meta, pch = 3, lwd = 3, col = "red",
+  allargs = NULL, expr = NULL, ...)
 }
 \arguments{
 \item{name}{Station name(s) to be plotted with red crosses}
 
-\item{metadf}{Dataframe with metadata. DEFAULT: meta}
-
 \item{x1, x2, y1, y2}{Relative location of minimap}
+
+\item{\dots}{Further arguments passed to \code{plotmap} and then to \code{\link{points}}}
+
+\item{metadf}{Dataframe with metadata. DEFAULT: meta}
 
 \item{pch, lwd, col}{Point properties}
 
 \item{allargs}{List of arguments passed to all gauge locations first}
 
 \item{expr}{Expression to be executed after points, see example. DEFAULT: NULL}
-
-\item{\dots}{Further arguments passed to \code{\link{points}}}
 }
 \value{
 None
 }
 \description{
-Plots DEM as small inset map with desired stations highlighted
+Plots DEM as (small inset) map with desired stations highlighted
 }
 \examples{
+plotmap("Koeln")
 plot(1:10)
 minimap("Koeln")
 minimap(0) # no stations
