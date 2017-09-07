@@ -4,23 +4,29 @@
 \alias{gnames}
 \title{gauge names}
 \usage{
-gnames(large = FALSE, app = FALSE, rhine = FALSE, poster = FALSE,
-  paper = FALSE, trend = FALSE)
+gnames(set = "all")
 }
 \arguments{
-\item{large, app, rhine, poster, paper, trend}{Logical: return only a subset of the gauge names? DEFAULT: FALSE}
+\item{set}{Character: Which subset of the gauge names should be returned? 
+Can be abbreviated as per \code{\link{match.arg}}.
+The options are described above. DEFAULT: "all"}
 }
 \value{
 Vector with names (charstrings)
 }
 \description{
 streamflow measurement gauge names along the rhine and tributaries.
-The default is to return all 196 names in alphabetical order.
-With the optional arguments, subsets can be chosen:\cr
-large: 55 gauges at large streams\cr
-rhine: 12 gauges along the actual Rhine river\cr
-poster: 9 regime-representative gauges\cr
-paper: 4 gauges selescted to be in the scientific article\cr
+With the \code{set} argument, different subsets can be chosen.
+\tabular{llll}{
+all(default)  \tab all 196 names in alphabetical order                \cr
+large         \tab 55 gauges at large streams                         \cr
+app           \tab large minus two stations with few data - for the \code{\link{rfsApp}} \cr
+trend         \tab 35 gauges for the local trend app                  \cr
+rawr,rawt     \tab 10 or 5 gauges along the rhine and tributaries - for the local raw data app          \cr
+rhine         \tab 12 gauges along the actual Rhine river             \cr
+poster        \tab 9 regime-representative gauges                     \cr
+paper         \tab 4 gauges selected to be in the scientific article  \cr
+}
 }
 \examples{
 gnames()

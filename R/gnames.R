@@ -1,12 +1,17 @@
 #' @title gauge names
 #' 
 #' @description streamflow measurement gauge names along the rhine and tributaries.
-#' The default is to return all 196 names in alphabetical order.
-#' With the optional arguments, subsets can be chosen:\cr
-#' large: 55 gauges at large streams\cr
-#' rhine: 12 gauges along the actual Rhine river\cr
-#' poster: 9 regime-representative gauges\cr
-#' paper: 4 gauges selescted to be in the scientific article\cr
+#' With the \code{set} argument, different subsets can be chosen.
+#' \tabular{llll}{
+#' all(default)  \tab all 196 names in alphabetical order                \cr
+#' large         \tab 55 gauges at large streams                         \cr
+#' app           \tab large minus two stations with few data - for the \code{\link{rfsApp}} \cr
+#' trend         \tab 35 gauges for the local trend app                  \cr
+#' rawr,rawt     \tab 10 or 5 gauges along the rhine and tributaries - for the local raw data app          \cr
+#' rhine         \tab 12 gauges along the actual Rhine river             \cr
+#' poster        \tab 9 regime-representative gauges                     \cr
+#' paper         \tab 4 gauges selected to be in the scientific article  \cr
+#' }
 #' 
 #' @return Vector with names (charstrings)
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jun 2017
@@ -16,21 +21,16 @@
 #' @examples
 #' gnames()
 #' 
-#' @param large,app,rhine,poster,paper,trend  Logical: return only a subset of the gauge names? DEFAULT: FALSE
-# @param \dots Further arguments passed to \code{\link{plot}}
+#' @param set Character: Which subset of the gauge names should be returned? 
+#'            Can be abbreviated as per \code{\link{match.arg}}.
+#'            The options are described above. DEFAULT: "all"
 #' 
 gnames <- function(
-large=FALSE,
-app=FALSE,
-rhine=FALSE,
-poster=FALSE,
-paper=FALSE,
-trend=FALSE
+ set="all"
 )
 {
-trueargs <- c(large,app,rhine,poster,paper,trend)
-if(sum(trueargs)>1) stop("only one of the arguments may be TRUE, not ",
-   paste(c("large","app","rhine","poster","paper","trend")[trueargs], collapse=" & "))
+set <- match.arg(set, choices=c("all","large", "app","trend","rawr","rawt",
+                                "rhine","poster","paper"))
 
 ###dput(sortDF(meta[meta$Q100>400,], "Q100")$name)
 lll <- c("Lobith", "Rees", "Ruhrort", "Duesseldorf", "Koeln", "Bonn", "Andernach",
@@ -46,32 +46,39 @@ lll <- c("Lobith", "Rees", "Ruhrort", "Duesseldorf", "Koeln", "Bonn", "Andernach
 "Rockenau", "Lauffen", "Plochingen", "Horb_Neckar",
 "Pforzheim_Enz", "Bad_Rotenfels", "Schwaibach", "Halden")
 
-if(large) return(lll)
-if(app) return(lll[-c(14,20)])
+if(set=="large") return(lll)
+if(set=="app") return(lll[-c(14,20)])
 
-if(trend) 
+if(set=="trend") 
 return( c("Lobith", "Rees", "Ruhrort", "Duesseldorf", "Koeln", "Bonn", "Andernach",
 "Kaub", "Mainz", "Worms", "Speyer", "Maxau", "Basel_Rheinhalle", "Rekingen", "Neuhausen", "Diepoldsau", 
 "Cochem", "Trier_Up", "Bollendorf", "Fremersdorf",
 "Frankfurt", "Kleinheubach", "Steinbach", "Wuerzburg", "Schweinfurt", "Pettstadt", "Kemmern", "Schwuerbitz",
-"Rockenau", "Lauffen", "Plochingen", "Horb_Neckar"))
+"Rockenau", "Lauffen", "Plochingen", "Horb_Neckar", "Kalkofen", "Hattingen", "Schermbeck_1"))
 
 
-if(rhine)
+if(set=="rawr")
+return(c("Lobith", "Koeln", "Andernach", "Mainz", "Worms", "Maxau", 
+         "Basel_Rheinhalle", "Rekingen", "Rheinklingen", "Diepoldsau"))
+if(set=="rawt")
+return(c("Hattingen", "Cochem", "Kalkofen", "Frankfurt", "Rockenau"))
+
+
+if(set=="rhine")
 return(c("Diepoldsau","Rekingen","Basel_Rheinhalle","Maxau","Rockenau",
           "Worms", "Wuerzburg","Frankfurt","Mainz","Cochem","Koeln","Lobith"))
 
-if(poster)
+if(set=="poster")
 return(c("Cochem","Frankfurt","Rockenau",
          "Basel_Rheinhalle","Rekingen","Diepoldsau",
          "Maxau","Worms","Mainz"))
 
-if(paper)
+if(set=="paper")
 return(c("Rekingen","Cochem","Mainz","Koeln"))
 
 # All names in alphabetical order:
 # load("data/dismeta.Rdata")  ;  dput(meta$name)
-c("Albisheim", "Alsdorf", "Alsdorf_Oberecken", "Altena", "Altenbamberg",
+lll <- c("Albisheim", "Alsdorf", "Alsdorf_Oberecken", "Altena", "Altenbamberg",
 "Altensteig", "Althornbach", "Andernach", "Arloff", "Asslar",
 "Bad_Imnau", "Bad_Kissingen", "Bad_Mergentheim", "Bad_Rotenfels",
 "Bad_Vilbel", "Basel_Rheinhalle", "Basel_Schifflaende", "Bentfeld",
@@ -111,4 +118,9 @@ c("Albisheim", "Alsdorf", "Alsdorf_Oberecken", "Altena", "Altenbamberg",
 "Villigst", "Weidenau", "Weinaehr", "Weine", "Wernerseck", "Westtuennen",
 "Wiesloch", "Windecken", "Wolfsmuenster", "Worms", "Wuerzburg")
 
+if(!all(lll %in% meta$name)) warning("Not all names are in meta$name.")
+if(!all(meta$name %in% lll)) warning("Not all meta$name are in current gnames list.")
+
+if(set=="all") lll else stop("set was not matched correctly.")
+ 
 }
