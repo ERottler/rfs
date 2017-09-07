@@ -14,6 +14,9 @@
 #' minimap(0) # no stations
 #' minimap("Cochem", allargs=list(pch=3,cex=0.5))
 #' 
+#' stats <- gnames(app=TRUE)[c(1,5,8,12)]#' 
+#' minimap(stats, expr=text(meta[name,"lon"], meta[name,"lat"], name, col=2, adj=c(0,1)))
+#' 
 #' pdf("test.pdf", height=5)
 #' hist(rnorm(100))
 #' minimap(c("Koeln","Rheinfelden"), y1=0.1, y2=0.9, x2=0.9)
@@ -27,6 +30,7 @@
 #' @param x1,x2,y1,y2 Relative location of minimap
 #' @param pch,lwd,col Point properties
 #' @param allargs     List of arguments passed to all gauge locations first
+#' @param expr        Expression to be executed after points, see example. DEFAULT: NULL
 #' @param \dots       Further arguments passed to \code{\link{points}}
 #' 
 minimap = function(
@@ -38,6 +42,7 @@ minimap = function(
  lwd=3,
  col="red",
  allargs=NULL,        # list of arguments passed to all points first
+ expr=NULL,
  ...
  )
 {
@@ -51,6 +56,7 @@ rasterImage(png::readPNG(dempath),
                      xright=12.02,   ytop=52.04+0.07)
 if(!is.null(allargs)) do.call(points, c(list(x=meta$lon, y=meta$lat), allargs))
 points(lat~lon, data=meta[name,], pch=pch, lwd=lwd, col=col, ...)
+eval(substitute(expr))
 },
 x1=x1,x2=x2,y1=y1,y2=y2, mar=c(0,0,0,0), bg="transparent", border=NA)
 }

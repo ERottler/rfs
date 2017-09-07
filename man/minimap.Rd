@@ -5,7 +5,8 @@
 \title{DEM plotting function}
 \usage{
 minimap(name, metadf = meta, x1 = 0.1, x2 = x1 + 0.2, y1 = 0.7,
-  y2 = y1 + 0.27, pch = 3, lwd = 3, col = "red", allargs = NULL, ...)
+  y2 = y1 + 0.27, pch = 3, lwd = 3, col = "red", allargs = NULL,
+  expr = NULL, ...)
 }
 \arguments{
 \item{name}{Station name(s) to be plotted with red crosses}
@@ -17,6 +18,8 @@ minimap(name, metadf = meta, x1 = 0.1, x2 = x1 + 0.2, y1 = 0.7,
 \item{pch, lwd, col}{Point properties}
 
 \item{allargs}{List of arguments passed to all gauge locations first}
+
+\item{expr}{Expression to be executed after points, see example. DEFAULT: NULL}
 
 \item{\dots}{Further arguments passed to \code{\link{points}}}
 }
@@ -31,6 +34,9 @@ plot(1:10)
 minimap("Koeln")
 minimap(0) # no stations
 minimap("Cochem", allargs=list(pch=3,cex=0.5))
+
+stats <- gnames(app=TRUE)[c(1,5,8,12)]#' 
+minimap(stats, expr=text(meta[name,"lon"], meta[name,"lat"], name, col=2, adj=c(0,1)))
 
 pdf("test.pdf", height=5)
 hist(rnorm(100))
