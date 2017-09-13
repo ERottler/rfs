@@ -4,7 +4,7 @@
 #' @author Berry Boessenkool, \email{berry-b@@gmx.de}, Jun 2017
 # @seealso \code{\link{help}}, \code{\link{help}}
 #' @keywords file
-# @importFrom package fun1 fun2
+#' @importFrom berryFunctions checkFile
 #' @export
 #' @examples
 #' seasFolder()
@@ -25,5 +25,6 @@ if(!file.exists(path)) path <- gsub("S:", "/home/berry", path)
 if(!file.exists(path)) stop("Cannot find project path. Last try:", path)
 files <- list(...)
 if(length(files)>0) path <- file.path(path, files, fsep="/")
+checkFile(path, warnonly=TRUE)
 path
 }
