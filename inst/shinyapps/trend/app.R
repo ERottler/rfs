@@ -1,35 +1,6 @@
 # TREND APP
 # Load packages and data ----
-library(extremeStat) ; library(rfs) ; library(berryFunctions)
-load(seasFolder("data/dismeta.Rdata"))
-
-seasTrend <- function(n, RPs=1.2, map=FALSE, trendpeakonly=FALSE)
-{
-# Get threshold from RPs:
-annMax <- annualMax(dis$date, dis[,n], shift=0)
-if(RPs>1)
-{
-dle <- distLextreme(annMax$max, gpd=FALSE, sel="gev", RPs=RPs, quiet=TRUE)
-threshold <- dle$returnlev["gev",1]
-} else
-if(almost.equal(RPs, 1)) threshold <- min(annMax$max, na.rm=TRUE)
-else threshold <- 0
-# Seasonality for all values > threshold:
-large <- which(dis[,n]>=threshold)
-s <- seasonality(dis[large,"date"], dis[large,n], shift=61, nmax=1, pch=15,
-            main=paste0(n, ", ", meta[n,"river"]), returnall=TRUE, adj=0.4,
-            drange=1930:2012, legend=FALSE, hlines=TRUE)
-# Trend line:
-s2 <- if(trendpeakonly)  s$annmax[between(s$annmax$year, 1960, 2010),]else
-                         s$data[  between(  s$data$year, 1960, 2010),] 
-linReg(doy~year, data=s2, add=TRUE, plotrange=1960:2011, pos1=NA)
-# Legend and map:
-colPointsLegend(z=dis[large,n], nlab=4, title="Streamflow  [m\U{00B3}/s]", 
-                y1=0.89, y2=1)
-if(map) minimap(n)
-}
-
-
+library(rfs) ; library(berryFunctions); load(seasFolder("data/dismeta.Rdata"))
 
 server <- function(input, output) {
 
@@ -56,7 +27,7 @@ output$location <- renderUI({selectInput("location", "Choose a location, or clic
 
 output$seasplot <- renderPlot({
 par(bg="grey96")
-seasTrend(loc_sel(), RPs=input$RPs, map=FALSE, trendpeakonly=input$tpeak)
+seasTrend(loc_sel(), RP=input$RPs, map=FALSE, trendpeakonly=input$tpeak)
 #box("figure", col=4)
 })
 
