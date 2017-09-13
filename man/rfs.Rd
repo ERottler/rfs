@@ -4,7 +4,6 @@
 \name{rfs}
 \alias{rfs}
 \alias{rfs-package}
-\alias{rfs-package}
 \title{Rhine flood seasonality}
 \description{
 Rhine flood seasonality analysis.

@@ -8,5 +8,5 @@ Depends: R (>= 2.10)
 Imports: berryFunctions (>= 1.15.17), pbapply, extremeStat (>= 1.3.5), png, fftw, stats, shiny, sp
 License: GPL(>=2)
 LazyData: true
-RoxygenNote: 6.0.1
+RoxygenNote: 6.0.1.9000
 BugReports: https://github.com/brry/rfs/issues
