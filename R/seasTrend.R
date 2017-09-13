@@ -64,7 +64,7 @@ if(plot)
 c_trex <- as.vector(coef(lm(doy~year, data=s_trex)))
 c_peak <- as.vector(coef(lm(doy~year, data=s_peak)))
 # Output
-out <- c(RP=RP, threshold=threshold, 
+out <- c(RP=RP, threshold=threshold, n=length(large),
          slope_trex=c_trex[2], slope_peak=c_peak[2], 
          inter_trex=c_trex[1], inter_peak=c_peak[1])
 return(out)
