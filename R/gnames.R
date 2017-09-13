@@ -118,6 +118,8 @@ lll <- c("Albisheim", "Alsdorf", "Alsdorf_Oberecken", "Altena", "Altenbamberg",
 "Villigst", "Weidenau", "Weinaehr", "Weine", "Wernerseck", "Westtuennen",
 "Wiesloch", "Windecken", "Wolfsmuenster", "Worms", "Wuerzburg")
 
+meta <- get("meta")
+
 if(!all(lll %in% meta$name)) warning("Not all names are in meta$name.")
 if(!all(meta$name %in% lll)) warning("Not all meta$name are in current gnames list.")
 
