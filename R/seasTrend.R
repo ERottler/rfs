@@ -18,8 +18,8 @@
 #' @param RP     Return Period for threshold. DEFAULT: 1.2
 #' @param plot   Logical: plot result? DEFAULT: TRUE
 #' @param map    Logical: draw \code{\link{minimap}}? DEFAULT: FALSE
-#' @param trendpeakonly Logical: only use annual peaks of threshold excesses 
-#'               for plotting with \code{\link{linReg}}? DEFAULT: FALSE
+#' @param trex,peak Logical: Plot trendline for (annual peaks of) threshold excesses 
+#                with \code{\link{linReg}}? DEFAULT: both TRUE
 #' @param shift  Shift passed to \code{\link{seasonality}}. DEFAULT: 61
 #' @param \dots  Further arguments passed to \code{\link{linReg}}
 #' 
@@ -29,7 +29,8 @@ disdf=get("dis"),
 RP=1.2, 
 plot=TRUE,
 map=FALSE, 
-trendpeakonly=FALSE,
+trex=TRUE,
+peak=TRUE,
 shift=61,
 ...
 )
@@ -54,8 +55,11 @@ s_trex <- s$data  [between(s$data$year,   1960, 2010),]
 s_peak <- s$annmax[between(s$annmax$year, 1960, 2010),]
 if(plot) 
   {
-  s_plot <- if(trendpeakonly) s_peak else s_trex
-  linReg(doy~year, data=s_plot, add=TRUE, plotrange=1960:2011, pos1=NA, ...)
+  if(peak) linReg(doy~year, data=s_peak, add=TRUE, plotrange=1960:2011, col="purple", 
+         colband=addAlpha("purple", alpha=0.08), lwd=2, pos1=NA, ...)
+  if(trex) linReg(doy~year, data=s_trex, add=TRUE, plotrange=1960:2011, col="orange", pos1=NA, lwd=2, ...)
+  legend("left", c("All threshold exceedances", "Annual peaks above threshold"), lty=0, 
+         text.col=c("orange","purple"), bg=addAlpha("white"), box.lty=0)
   # Legend and map:
   colPointsLegend(z=disdf[large,n], nlab=4, title="Streamflow  [m\U{00B3}/s]", 
                   y1=0.89, y2=1)

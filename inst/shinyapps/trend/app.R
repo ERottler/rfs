@@ -28,7 +28,8 @@ output$location <- renderUI({selectInput("location", "Choose a location, or clic
 
 output$seasplot <- renderPlot({
 par(bg="grey96")
-seasTrend(loc_sel(), RP=input$RPs, map=FALSE, trendpeakonly=input$tpeak)
+seasTrend(loc_sel(), RP=input$RPs, shift=input$shift, map=FALSE,
+          trex=input$trex, peak=input$peak)
 #box("figure", col=4)
 })
 
@@ -89,13 +90,16 @@ ui <- fixedPage(
       "The threshold is determined as the GEV return level for the entire time ",
       "series of observations for a given return period.",
       br(), br(),
-      "A linear regression line is added for all the doy-year pairs of the high ",
+      "A linear regression line (orange) is added for all the doy-year pairs of the high ",
       "streamflow values in the 50 years between 1960 and 2010. ",
-      "The crosses mark the doy with the annual maximum.", 
-      "If desired, only those are used for the trendline.", br(), br(),
+      "The crosses mark the doy with the annual maximum of those threshold exceedances.", 
+      "For these doys, the regression is plotted in purple.", br(), br(),
       uiOutput("location"),
       numericInput("RPs", "Return period for threshold", value=1.2, min=0.9, max=200, step=0.1),
-      checkboxInput("tpeak", strong("Use only annual peaks for trend line"))
+      strong("Show trend line for:"),
+      checkboxInput("trex", "all doys above threshold", value=TRUE),
+      checkboxInput("peak", "annual peaks of threshold exceedances", value=TRUE),
+      sliderInput("shift", strong("Yearbreak shift"), min=0, max=200, value=61, step=1)
     ),
     # Show seasonality change plot
     mainPanel(plotOutput("seasplot"),
