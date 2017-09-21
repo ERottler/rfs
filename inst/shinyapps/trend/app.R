@@ -1,9 +1,10 @@
 # TREND APP
 # Load packages and data ----
-library(rfs) ; library(berryFunctions); load(seasFolder("data/dismeta.Rdata"))
 
 server <- function(input, output) {
 
+if(!exists("dis")) {library(rfs) ; library(berryFunctions)
+                    load(seasFolder("data/dismeta.Rdata"), envir=globalenv())}
 # Reactive selection ----
 
 loc_sel <- reactive({
