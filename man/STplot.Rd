@@ -2,38 +2,32 @@
 % Please edit documentation in R/STplot.R
 \name{STplot}
 \alias{STplot}
-\alias{aliasMayBeRemoved}
-\title{title}
+\title{Plot seasonality trend depending on threshold for "flood"}
 \usage{
 STplot(name, STlist = get("ST"), ylim = NA, map = TRUE)
 }
 \arguments{
-\item{name}{Gauge name}
+\item{name}{Character string: Gauge name}
+
+\item{STlist}{List as created in \code{\link{rfs-package}.R}. DEFAULT: ST}
+
+\item{ylim}{Two numbers: Y axis limits. DEFAULT: NA (computed internally)}
 
 \item{map}{Logical. Should map be plotted? DEFAULT: TRUE}
 }
-\value{
-ReturnValue
-}
 \description{
-description
+Plot seasonality trend depending on threshold for "flood"
 }
-\details{
-detailsMayBeRemoved
-}
-\section{Warning}{
- warningMayBeRemoved
-}
-
 \examples{
 load(seasFolder("data/ST.Rdata"))
 STplot("Koeln")
 
 }
 \seealso{
-\code{\link{help}}, \code{graphics::\link[graphics]{plot}}
+\code{\link{seasTrend}}
 }
 \author{
 Berry Boessenkool, \email{berry-b@gmx.de}, Sep 2017
 }
 \keyword{aplot}
+\keyword{hplot}
