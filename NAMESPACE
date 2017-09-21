@@ -2,6 +2,7 @@
 
 export(RPcols)
 export(RPvals)
+export(STplot)
 export(annualMax)
 export(gnames)
 export(minimap)

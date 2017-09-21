@@ -76,11 +76,24 @@ NULL
 
 
 
-# Data inclusion in package ----
 if(FALSE){
 
 # load data from local computer (original data is not allowed to be public):
 load(seasFolder("data/dismeta.Rdata"))
+
+# save seasTrend ST data ----
+ST <- pblapply(gnames("trend"), function(n) # 14 mins
+ {
+ RPs <- seq(1, 5, len=50)
+ ST2 <- sapply(RPs, seasTrend, n=n, disdf=dis, plot=FALSE) # ca 30 secs per stat
+ as.data.frame(t(ST2))
+ })
+names(ST) <- gnames("trend")
+save(ST, file=paste0(seasFolder(), "/data/ST.Rdata"))
+# This is saved only locally
+ 
+ 
+# Data inclusion in package ----
 
 # set up parallelization:
 library(pbapply); library(parallel) # for parallel lapply execution
@@ -88,7 +101,7 @@ cl <- makeCluster( detectCores()-1 )
 clusterExport(cl, c("dis", "meta"))
 
 # compute seasonality changes:
-seas <- pbsapply(gnames(large=TRUE), cl=cl, FUN=qdoyPeriods, progbar=FALSE, 
+seas <- pbsapply(gnames("large"), cl=cl, FUN=qdoyPeriods, progbar=FALSE, 
                  negative2NA=TRUE, simplify=FALSE) # 2 mins
 stopCluster(cl); rm(cl); gc()
 
