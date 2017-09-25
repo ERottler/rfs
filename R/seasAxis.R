@@ -14,6 +14,8 @@
 #' seasAxis(shift=117)
 #' seasAxis(shift=117, targs=list(col.ticks="red"), lwd=3, col="purple")
 #' 
+#' plot(1:366, yaxt="n", ylim=c(366,0))
+#' seasAxis(shift=117, side=2)
 #' 
 #' @param shift   Number of days to move the year-break to.
 #'                E.g. shift=61 for German hydrological year (Nov to Oct). DEFAULT: 0
@@ -23,6 +25,7 @@
 #' @param mline   Placement of labels (Distance from axis). DEFAULT: 0.7
 #' @param xlab    Label for the axis. DEFAULT: "Month"
 #' @param xline   Placement of axis label. DEFAULT: 2
+#' @param side    Margin side for \code{\link{axis}}. DEFAULT: 1
 #' @param targs   Optional list of arguments passed to \code{\link{axis}}
 #'                for month separating ticks. DEFAULT: NULL
 #' @param largs   Optional list of arguments passed to \code{\link{axis}}
@@ -39,6 +42,7 @@ seasAxis <- function(
   mline=0.7,
   xlab="Month",
   xline=2,
+  side=1,
   targs=NULL,
   largs=NULL,
   xargs=NULL,
@@ -54,15 +58,18 @@ tdoy <- as.numeric(format(tick,"%j"))
 ldoy <- as.numeric(format(labs,"%j"))
 
 # monthly labels:
-tdef <- list(side=1, at=tdoy, labels=FALSE, las=1)
-ldef <- list(side=1, at=ldoy, labels=mlabs, tick=FALSE, mgp=c(3,mline,0), las=1)
+tdef <- list(side=side, at=tdoy, labels=FALSE, las=1)
+ldef <- list(side=side, at=ldoy, labels=mlabs, tick=FALSE, mgp=c(3,mline,0), las=1)
 do.call(axis, owa(tdef, targs))
 do.call(axis, owa(ldef, largs))
 
+ax1 <- side %in% c(1,3)
 # vertical line at Jan 1:
-if(janline & shift!=0) abline(v=shift+1, ...)
+if(janline & shift!=0) if(ax1) abline(v=shift+1, ...) else abline(h=shift+1, ...)
 
 # Label for complete Axis:
-do.call(title, owa(list(xlab=xlab, line=xline), xargs))
+xdef <- list(xlab=xlab, line=xline)
+if(!ax1) names(xdef)[1] <- "ylab"
+do.call(title, owa(xdef, xargs))
 }
 

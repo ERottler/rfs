@@ -5,8 +5,8 @@
 \title{Seasonality axis}
 \usage{
 seasAxis(shift = 0, janline = TRUE, mlabs = substr(month.abb, 1, 1),
-  mline = 0.7, xlab = "Month", xline = 2, targs = NULL, largs = NULL,
-  xargs = NULL, ...)
+  mline = 0.7, xlab = "Month", xline = 2, side = 1, targs = NULL,
+  largs = NULL, xargs = NULL, ...)
 }
 \arguments{
 \item{shift}{Number of days to move the year-break to.
@@ -22,6 +22,8 @@ January 1st if \code{shift!=0}? DEFAULT: TRUE}
 \item{xlab}{Label for the axis. DEFAULT: "Month"}
 
 \item{xline}{Placement of axis label. DEFAULT: 2}
+
+\item{side}{Margin side for \code{\link{axis}}. DEFAULT: 1}
 
 \item{targs}{Optional list of arguments passed to \code{\link{axis}}
 for month separating ticks. DEFAULT: NULL}
@@ -46,6 +48,8 @@ plot(1:366, xaxt="n", xaxs="i")
 seasAxis(shift=117)
 seasAxis(shift=117, targs=list(col.ticks="red"), lwd=3, col="purple")
 
+plot(1:366, yaxt="n", ylim=c(366,0))
+seasAxis(shift=117, side=2)
 
 }
 \seealso{
