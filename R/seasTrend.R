@@ -6,7 +6,7 @@
 #' @seealso \code{\link{rfsApp}("trend")}
 #' @keywords aplot
 #' @importFrom extremeStat distLextreme
-#' @importFrom berryFunctions almost.equal seasonality between linReg colPointsLegend
+#' @importFrom berryFunctions almost.equal seasonality between linReg colPointsLegend addAlpha
 #' @importFrom stats coef lm
 #' @export
 #' @examples
