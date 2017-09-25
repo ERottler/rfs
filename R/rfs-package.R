@@ -65,6 +65,15 @@ NULL
 #' head(meta[,c(3,4,6,22:28)])
 "meta"
 
+#' @title threshold computation functions
+#' @description thresfuns: streamflow depending on return period 
+#'              for 35 gauges along the Rhine. Used as threshold in \code{\link{seasTrend}}
+#' @format A list of functions
+#' @docType data
+#' @examples
+#' thresfuns$Koeln(5) # streamflow with return period of 5 years
+"thresfuns"
+
 #' @title Europe borders map
 #' @description map: A dataset with borders of European countries used in the 
 #'              \code{\link{rfsApp}}
@@ -93,12 +102,14 @@ save(ST, file=paste0(seasFolder(), "/data/ST.Rdata"))
 # This is saved only locally
  
  
-# Data inclusion in package ----
 
 # set up parallelization:
 library(pbapply); library(parallel) # for parallel lapply execution
 cl <- makeCluster( detectCores()-1 )
 clusterExport(cl, c("dis", "meta"))
+
+
+# qdoyPeriods data inclusion in package ----
 
 # compute seasonality changes:
 seas <- pbsapply(gnames("large"), cl=cl, FUN=qdoyPeriods, progbar=FALSE, 
@@ -127,6 +138,27 @@ tools::resaveRdaFiles("data/seas.rda") # from 5.7 to 4.8 MB
 save(meta,       file="data/meta.rda")
 tools::resaveRdaFiles("data/meta.rda") 
 
+
+# seasTrend threshold data inclusion in package ----
+
+computeThreshold <- function(name)
+{
+annMax <- rfs::annualMax(dis$date, dis[,name], shift=61)
+RPs <- berryFunctions::logSpaced(n=50, min=1.1, max=10, plot=F)
+dle <- extremeStat::distLextreme(annMax$max, gpd=FALSE, sel="gev",RPs=RPs, quiet=TRUE)
+threshold <- as.numeric(dle$returnlev["gev",])
+approxfun(x=c(1,RPs), y=c(min(annMax$max,na.rm=TRUE), threshold))
+}
+
+thresfuns <- pbsapply(gnames("trend"), cl=cl, FUN=computeThreshold, simplify=FALSE) # 4 secs
+stopCluster(cl); rm(cl); gc()
+
+save(thresfuns,  file="data/thresfuns.rda")
+tools::resaveRdaFiles("data/thresfuns.rda") 
+
+
+
+# App data ----
 
 # install.packages(c("rworldmap", "rworldxtra"))
 map <- rworldmap::getMap("high")

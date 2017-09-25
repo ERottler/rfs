@@ -36,14 +36,7 @@ shift=61,
 )
 {
 # Get threshold from RP:
-annMax <- annualMax(disdf$date, disdf[,n], shift=0)
-if(RP>1)
-{
-dle <- distLextreme(annMax$max, gpd=FALSE, sel="gev", RPs=RP, quiet=TRUE)
-threshold <- dle$returnlev["gev",1]
-} else
-if(almost.equal(RP, 1)) threshold <- min(annMax$max, na.rm=TRUE)
-else threshold <- 0
+threshold <- if(RP>1) thresfuns[[n]](RP) else 0
 # Seasonality for all values > threshold:
 large <- which(disdf[,n]>=threshold)
 meta <- get("meta")
