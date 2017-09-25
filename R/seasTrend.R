@@ -47,8 +47,11 @@ else threshold <- 0
 # Seasonality for all values > threshold:
 large <- which(disdf[,n]>=threshold)
 meta <- get("meta")
+col <- seqPal(100)
+if(!trex) col <- NA
 s <- seasonality(disdf[large,"date"], disdf[large,n], shift=shift, nmax=1, pch=15,
-            main=paste0(n, ", ", meta[n,"river"]), returnall=TRUE, adj=0.4,
+            main=paste0(n, ", ", meta[n,"river"]), returnall=TRUE, col=col,
+            maxargs=list(col=if(peak) "purple" else NA), adj=0.4,
             drange=1930:2012, legend=FALSE, plot=ifelse(plot,1,0), hlines=TRUE)
 # Trend line:
 s_trex <- s$data  [between(s$data$year,   1960, 2010),]
@@ -61,8 +64,9 @@ if(plot)
   legend("left", c("All threshold exceedances", "Annual peaks above threshold"), lty=0, 
          text.col=c("orange","purple"), bg=addAlpha("white"), box.lty=0)
   # Legend and map:
-  colPointsLegend(z=disdf[large,n], nlab=4, title="Streamflow  [m\U{00B3}/s]", 
-                  y1=0.89, y2=1)
+  colPointsLegend(z=disdf[large,n], nlab=4, title=paste0("Streamflow > ",
+                  round(min(disdf[large,n], na.rm=TRUE)),"  [m\U{00B3}/s]"), 
+                  y1=0.89, y2=1, colors=col)
   if(map) minimap(n)
   }
 c_trex <- as.vector(coef(lm(doy~year, data=s_trex)))
