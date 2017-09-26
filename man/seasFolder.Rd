@@ -4,10 +4,12 @@
 \alias{seasFolder}
 \title{Get path to folder with seasonality analysis + data}
 \usage{
-seasFolder(...)
+seasFolder(..., warnonly = FALSE)
 }
 \arguments{
 \item{\dots}{Optional filename(s) that will be appended.}
+
+\item{warnonly}{Logical: only warn instead of stopping if files are not found. DEFAULT: FALSE}
 }
 \value{
 Path(s)

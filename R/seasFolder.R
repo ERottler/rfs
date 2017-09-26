@@ -8,13 +8,15 @@
 #' @export
 #' @examples
 #' seasFolder()
-#' seasFolder("dummy.txt")
-#' stopifnot(length(seasFolder("dummy.txt", "dude.xyz"))==2)
+#' seasFolder("dummy.txt", warnonly=TRUE)
+#' stopifnot(length(seasFolder("dummy.txt", "dude.xyz", warnonly=TRUE))==2)
 #' 
 #' @param \dots Optional filename(s) that will be appended.
+#' @param warnonly Logical: only warn instead of stopping if files are not found. DEFAULT: FALSE
 #' 
 seasFolder <- function(
-...
+...,
+warnonly=FALSE
 )
 {
 path <- "C:/Users/boessenkool/Dropbox/Promotion/6_Seasonality"
@@ -25,6 +27,6 @@ if(!file.exists(path)) path <- gsub("S:", "/home/berry", path)
 if(!file.exists(path)) stop("Cannot find project path. Last try:", path)
 files <- list(...)
 if(length(files)>0) path <- file.path(path, files, fsep="/")
-checkFile(path, warnonly=TRUE)
+checkFile(path, warnonly=warnonly)
 path
 }
