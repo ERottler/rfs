@@ -144,7 +144,7 @@ tools::resaveRdaFiles("data/meta.rda")
 computeThreshold <- function(name)
 {
 annMax <- rfs::annualMax(dis$date, dis[,name], shift=61)
-RPs <- 10^seq(from=log10(1), to=log10(10), len=100)
+RPs <- 10^seq(from=log10(1.01), to=log10(10), len=100)
 dle <- extremeStat::distLextreme(annMax$max, gpd=FALSE, sel="gev",RPs=RPs, quiet=TRUE)
 threshold <- as.numeric(dle$returnlev["gev",])
 approxfun(x=c(1,RPs), y=c(min(annMax$max,na.rm=TRUE), threshold))
@@ -153,6 +153,7 @@ approxfun(x=c(1,RPs), y=c(min(annMax$max,na.rm=TRUE), threshold))
 thresfuns <- pbsapply(gnames("trend"), cl=cl, FUN=computeThreshold, simplify=FALSE) # 4 secs
 stopCluster(cl); rm(cl); gc()
 
+setwd(devtools::as.package(".")$path); getwd()
 save(thresfuns,  file="data/thresfuns.rda")
 tools::resaveRdaFiles("data/thresfuns.rda") 
 
