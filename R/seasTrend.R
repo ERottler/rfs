@@ -37,6 +37,12 @@ shift=61,
 {
 # Get threshold from RP:
 threshold <- if(RP>=1) thresfuns[[n]](RP) else 0
+if(RP>10) 
+ {
+ plot.new()
+ text(0.5,0.5,paste0("RP is ", RP, ", but may not be larger than 10."))
+ return()
+ }
 # Seasonality for all values > threshold:
 large <- which(disdf[,n]>=threshold)
 meta <- get("meta")

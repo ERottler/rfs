@@ -95,7 +95,7 @@ ui <- fixedPage(
       "The crosses mark the doy with the annual maximum of those threshold exceedances.", 
       "For these doys, the regression is plotted in purple.", br(), br(),
       uiOutput("location"),
-      numericInput("RPs", "Return period for threshold", value=1.2, min=0.9, max=200, step=0.1),
+      numericInput("RPs", "Return period for threshold", value=1.2, min=0.9, max=10, step=0.1),
       strong("Show trend line for:"),
       checkboxInput("trex", "all doys above threshold", value=TRUE),
       checkboxInput("peak", "annual peaks of threshold exceedances", value=TRUE),
