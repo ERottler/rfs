@@ -8,6 +8,7 @@
 #' @importFrom extremeStat distLextreme
 #' @importFrom berryFunctions almost.equal seasonality between linReg colPointsLegend addAlpha
 #' @importFrom stats coef lm
+#' @importFrom graphics plot.new
 #' @export
 #' @examples
 #' load(seasFolder("data/dismeta.Rdata"))
@@ -18,8 +19,9 @@
 #' @param RP     Return Period for threshold. DEFAULT: 1.2
 #' @param plot   Logical: plot result? DEFAULT: TRUE
 #' @param map    Logical: draw \code{\link{minimap}}? DEFAULT: FALSE
-#' @param trex,peak Logical: Plot trendline for (annual peaks of) threshold excesses 
-#                with \code{\link{linReg}}? DEFAULT: both TRUE
+#' @param trex   Logical: Plot trend for threshold excesses? DEFAULT: TRUE
+#' @param peak   Logical: Plot trend for annual peaks of threshold excesses? DEFAULT: TRUE
+#' @param legpos Position of \code{\link{legend}}. DEFAULT: "left"
 #' @param shift  Shift passed to \code{\link{seasonality}}. DEFAULT: 61
 #' @param \dots  Further arguments passed to \code{\link{linReg}}
 #' 
@@ -31,6 +33,7 @@ plot=TRUE,
 map=FALSE, 
 trex=TRUE,
 peak=TRUE,
+legpos="left",
 shift=61,
 ...
 )
@@ -55,21 +58,26 @@ s <- seasonality(disdf[large,"date"], disdf[large,n], shift=shift, nmax=1, pch=1
 # Trend line:
 s_trex <- s$data  [between(s$data$year,   1960, 2010),]
 s_peak <- s$annmax[between(s$annmax$year, 1960, 2010),]
+c_trex <- as.vector(coef(lm(doy~year, data=s_trex)))
+c_peak <- as.vector(coef(lm(doy~year, data=s_peak)))
+l_trex <- paste0(   "All threshold exceedances\nn = ",nrow(s_trex), 
+                 ", trend slope = ", round(-10*c_trex[2],1), " days/decade\n")
+l_peak <- paste0("Annual peaks above threshold\nn = ",nrow(s_peak), 
+                 ", trend slope = ", round(-10*c_peak[2],1), " days/decade")
 if(plot) 
   {
+  abline(v=seq(1930, 2010, by=5), col=c(1,8)); box()
   if(peak) linReg(doy~year, data=s_peak, add=TRUE, plotrange=1960:2011, col="purple", 
-         colband=addAlpha("purple", alpha=0.08), lwd=2, pos1=NA, ...)
+                  colband=addAlpha("purple", alpha=0.08), lwd=2, pos1=NA, ...)
   if(trex) linReg(doy~year, data=s_trex, add=TRUE, plotrange=1960:2011, col="orange", pos1=NA, lwd=2, ...)
-  legend("left", c("All threshold exceedances", "Annual peaks above threshold"), lty=0, 
-         text.col=c("orange","purple"), bg=addAlpha("white"), box.lty=0)
+  legend(x=legpos, c(ifelse(trex, l_trex, " \n \n "), ifelse(peak, l_peak, " \n ")), 
+         lty=0, text.col=c("orange","purple"), bg=addAlpha("white"), box.lty=0)
   # Legend and map:
   colPointsLegend(z=disdf[large,n], nlab=4, title=paste0("Streamflow > ",
                   round(min(disdf[large,n], na.rm=TRUE)),"  [m\U{00B3}/s]"), 
                   y1=0.89, y2=1, colors=col)
   if(map) minimap(n)
   }
-c_trex <- as.vector(coef(lm(doy~year, data=s_trex)))
-c_peak <- as.vector(coef(lm(doy~year, data=s_peak)))
 # Output
 out <- c(RP=RP, threshold=threshold, n=length(large),
          slope_trex=c_trex[2], slope_peak=c_peak[2], 

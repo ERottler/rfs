@@ -5,7 +5,7 @@
 \title{Seasonality trend 1960:2010}
 \usage{
 seasTrend(n, disdf = get("dis"), RP = 1.2, plot = TRUE, map = FALSE,
-  trex = TRUE, peak = TRUE, shift = 61, ...)
+  trex = TRUE, peak = TRUE, legpos = "left", shift = 61, ...)
 }
 \arguments{
 \item{n}{Character: Name of gauge to be analyzed, see \code{\link{gnames}}}
@@ -18,7 +18,11 @@ seasTrend(n, disdf = get("dis"), RP = 1.2, plot = TRUE, map = FALSE,
 
 \item{map}{Logical: draw \code{\link{minimap}}? DEFAULT: FALSE}
 
-\item{trex, peak}{Logical: Plot trendline for (annual peaks of) threshold excesses}
+\item{trex}{Logical: Plot trend for threshold excesses? DEFAULT: TRUE}
+
+\item{peak}{Logical: Plot trend for annual peaks of threshold excesses? DEFAULT: TRUE}
+
+\item{legpos}{Position of \code{\link{legend}}. DEFAULT: "left"}
 
 \item{shift}{Shift passed to \code{\link{seasonality}}. DEFAULT: 61}
 

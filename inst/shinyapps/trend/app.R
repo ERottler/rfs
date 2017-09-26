@@ -29,7 +29,7 @@ output$location <- renderUI({selectInput("location", "Choose a location, or clic
 output$seasplot <- renderPlot({
 par(bg="grey96")
 seasTrend(loc_sel(), RP=input$RPs, shift=input$shift, map=FALSE,
-          trex=input$trex, peak=input$peak)
+          trex=input$trex, peak=input$peak, legpos=input$legpos)
 #box("figure", col=4)
 })
 
@@ -99,7 +99,10 @@ ui <- fixedPage(
       strong("Show trend line for:"),
       checkboxInput("trex", "all doys above threshold", value=TRUE),
       checkboxInput("peak", "annual peaks of threshold exceedances", value=TRUE),
-      sliderInput("shift", strong("Yearbreak shift"), min=0, max=200, value=61, step=1)
+      sliderInput("shift", strong("Yearbreak shift"), min=0, max=200, value=61, step=1),
+      selectInput("legpos", strong("Legend position"), 
+                  choices=c("left", "topleft", "top", "topright", "right", 
+                            "bottomright", "bottom", "bottomleft"))
     ),
     # Show seasonality change plot
     mainPanel(plotOutput("seasplot"),
