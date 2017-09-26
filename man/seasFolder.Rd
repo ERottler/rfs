@@ -9,7 +9,8 @@ seasFolder(..., warnonly = FALSE)
 \arguments{
 \item{\dots}{Optional filename(s) that will be appended.}
 
-\item{warnonly}{Logical: only warn instead of stopping if files are not found. DEFAULT: FALSE}
+\item{warnonly}{Logical: only warn instead of stopping if files are not found. 
+NA to not check file existence. DEFAULT: FALSE}
 }
 \value{
 Path(s)
@@ -19,8 +20,8 @@ Get path to (files in) the folder with seasonality analysis + data
 }
 \examples{
 seasFolder()
-seasFolder("dummy.txt")
-stopifnot(length(seasFolder("dummy.txt", "dude.xyz"))==2)
+seasFolder("dummy.txt", warnonly=TRUE)
+stopifnot(length(seasFolder("dummy.txt", "dude.xyz", warnonly=TRUE))==2)
 
 }
 \author{
