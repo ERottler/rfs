@@ -36,7 +36,7 @@ shift=61,
 )
 {
 # Get threshold from RP:
-threshold <- if(RP>1) thresfuns[[n]](RP) else 0
+threshold <- if(RP>=1) thresfuns[[n]](RP) else 0
 # Seasonality for all values > threshold:
 large <- which(disdf[,n]>=threshold)
 meta <- get("meta")
