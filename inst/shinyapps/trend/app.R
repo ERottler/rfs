@@ -19,7 +19,7 @@ if(!is.null(input$plot_click)){
 loc
 })
 
-output$location <- renderUI({selectInput("location", "Choose a location, or click on the map", 
+output$location <- renderUI({selectInput("location", "Gauge", 
                 choices=gnames("trend"), selected=loc_sel())
 })
 
@@ -29,7 +29,8 @@ output$location <- renderUI({selectInput("location", "Choose a location, or clic
 output$seasplot <- renderPlot({
 par(bg="grey96")
 seasTrend(loc_sel(), RP=input$RPs, shift=input$shift, map=FALSE,
-          trex=input$trex, peak=input$peak, legpos=input$legpos)
+          trex=input$trex, peak=input$peak, legpos=input$legpos,
+          startmonth=as.numeric(input$startmonth), nmonths=as.numeric(input$nmonths))
 #box("figure", col=4)
 })
 
@@ -88,21 +89,26 @@ ui <- fixedPage(
       "The color specifies the streamflow value as noted in the legend.", 
       br(),
       "The threshold is determined as the GEV return level for the entire time ",
-      "series of observations for a given return period.",
-      br(), br(),
+      "series of observations for a given return period (RP).",
+      br(), 
       "A linear regression line (orange) is added for all the doy-year pairs of the high ",
       "streamflow values in the 50 years between 1960 and 2010. ",
-      "The crosses mark the doy with the annual maximum of those threshold exceedances.", 
-      "For these doys, the regression is plotted in purple.", br(), br(),
-      uiOutput("location"),
-      numericInput("RPs", "Return period for threshold", value=1.2, min=0.9, max=10, step=0.1),
-      strong("Show trend line for:"),
+      br(), 
+      "The purple crosses and regression line mark the doy with the annual ",
+      "maximum of those threshold exceedances.", 
+      br(), br(),
+      column(6, uiOutput("location")),
+      column(6, numericInput("RPs", "RP for threshold", value=1.2, min=0.9, max=10, step=0.1)),
+      br(), strong("Show trend line for:"),
       checkboxInput("trex", "all doys above threshold", value=TRUE),
       checkboxInput("peak", "annual peaks of threshold exceedances", value=TRUE),
       sliderInput("shift", strong("Yearbreak shift"), min=0, max=200, value=61, step=1),
-      selectInput("legpos", strong("Legend position"), 
-                  choices=c("left", "topleft", "top", "topright", "right", 
-                            "bottomright", "bottom", "bottomleft"))
+      strong("Legend position and time period"),
+      fixedRow(column(4,
+        selectInput("legpos", "Legend", choices=c("left", "topleft", "top", 
+                    "topright", "right", "bottomright", "bottom", "bottomleft"))),
+        column(4,selectInput("startmonth", "begin", choices=1:12)),
+        column(4,selectInput("nmonths", "n months", choices=1:12, selected=12)  ))
     ),
     # Show seasonality change plot
     mainPanel(plotOutput("seasplot"),

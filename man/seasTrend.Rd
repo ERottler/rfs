@@ -5,7 +5,8 @@
 \title{Seasonality trend 1960:2010}
 \usage{
 seasTrend(n, disdf = get("dis"), RP = 1.2, plot = TRUE, map = FALSE,
-  trex = TRUE, peak = TRUE, legpos = "left", shift = 61, ...)
+  trex = TRUE, peak = TRUE, startmonth = 1, nmonths = 12,
+  legpos = "left", shift = 61, ...)
 }
 \arguments{
 \item{n}{Character: Name of gauge to be analyzed, see \code{\link{gnames}}}
@@ -21,6 +22,11 @@ seasTrend(n, disdf = get("dis"), RP = 1.2, plot = TRUE, map = FALSE,
 \item{trex}{Logical: Plot trend for threshold excesses? DEFAULT: TRUE}
 
 \item{peak}{Logical: Plot trend for annual peaks of threshold excesses? DEFAULT: TRUE}
+
+\item{startmonth}{Integer between 1 and 12. To select which months
+are used in the trend analysis. DEFAULT: 1}
+
+\item{nmonths}{Integer between 1 and 12. Hom many months are used? DEFAULT: 12}
 
 \item{legpos}{Position of \code{\link{legend}}. DEFAULT: "left"}
 

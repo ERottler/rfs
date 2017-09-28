@@ -21,6 +21,9 @@
 #' @param map    Logical: draw \code{\link{minimap}}? DEFAULT: FALSE
 #' @param trex   Logical: Plot trend for threshold excesses? DEFAULT: TRUE
 #' @param peak   Logical: Plot trend for annual peaks of threshold excesses? DEFAULT: TRUE
+#' @param startmonth Integer between 1 and 12. To select which months
+#'               are used in the trend analysis. DEFAULT: 1
+#' @param nmonths Integer between 1 and 12. Hom many months are used? DEFAULT: 12
 #' @param legpos Position of \code{\link{legend}}. DEFAULT: "left"
 #' @param shift  Shift passed to \code{\link{seasonality}}. DEFAULT: 61
 #' @param \dots  Further arguments passed to \code{\link{linReg}}
@@ -33,6 +36,8 @@ plot=TRUE,
 map=FALSE, 
 trex=TRUE,
 peak=TRUE,
+startmonth=1,
+nmonths=12,
 legpos="left",
 shift=61,
 ...
@@ -47,7 +52,12 @@ if(RP>10)
  return()
  }
 # Seasonality for all values > threshold:
-large <- which(disdf[,n]>=threshold)
+if(!startmonth %in% 1:12) stop("startmonth must be between 1 and 12, not ", startmonth)
+large <- disdf[,n]>=threshold
+if(startmonth!=1 | nmonths!=12)
+   large <- large & between(as.numeric(format(disdf$date, "%m")), 
+                                       startmonth, startmonth+nmonths-1)
+large <- which(large)
 meta <- get("meta")
 col <- seqPal(100)
 if(!trex) col <- NA
