@@ -8,9 +8,9 @@ qdoyVisPeriods(name, seaslist = get("seas"), qdp = seaslist[[name]],
   dist = "gev", metadf = get("meta"), steps = 1:3, RPs = c(1.111, 2, 10,
   100), sd = -1, map = TRUE, axis = TRUE, legend = TRUE, x1 = 0.65,
   x2 = 0.95, y1 = 0.85, y2 = 1, text = TRUE, mar = c(1.8, 3.2, 3,
-  0.2), ylim = NA, cex.axis = 1, boxcol = 1, boxlwd = 1, maincex = 1,
-  mainline = NA, mainadj = 0.35, mainsep = "\\n", xticks.lwd = 1,
-  x.line = 0, ...)
+  0.2), ylim = NA, cex.axis = 1, lwd = 3, boxcol = 1, boxlwd = 1,
+  maincex = 1, mainline = NA, mainadj = 0.35, mainsep = "\\n",
+  xticks.lwd = 1, x.line = 0, ...)
 }
 \arguments{
 \item{name}{Gauge station name}
@@ -49,6 +49,8 @@ DEFAULT: negative value to suppress smoothing}
 maximum of selected data. DEFAULT: NA}
 
 \item{cex.axis}{Size of axis labels (also y axis) and text. DEFAULT: 1}
+
+\item{lwd}{Line width. DEFAULT: 3}
 
 \item{boxcol, boxlwd}{Color and width of box around plot region. DEFAULTS: 1,1}
 

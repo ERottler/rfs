@@ -32,6 +32,7 @@
 #'                    \code{\link[berryFunctions]{lim0}}, or NA for the automatic
 #'                    maximum of selected data. DEFAULT: NA
 #' @param cex.axis    Size of axis labels (also y axis) and text. DEFAULT: 1
+#' @param lwd         Line width. DEFAULT: 3
 #' @param boxcol,boxlwd Color and width of box around plot region. DEFAULTS: 1,1
 #' @param maincex,mainline,mainadj,mainsep Arguments to customize the title.
 #' @param xticks.lwd,x.line X axis tick width and line. DEFAULT. 1,0
@@ -54,6 +55,7 @@ text=TRUE,
 mar=c(1.8,3.2,3,0.2),
 ylim=NA,
 cex.axis=1,
+lwd=3,
 boxcol=1,
 boxlwd=1,
 maincex=1,
@@ -78,7 +80,7 @@ plot(1:366, type="n", xaxs="i", axes=FALSE, ylim=ylimi, xlab="", ylab="", las=1,
 at <- pretty2(par("usr")[3:4], n=4)
 at <- unique(c(0,at)) # sometimes zero is missing
 axis(2, at=at, mgp=c(3,0.5,0), cex.axis=cex.axis, las=1)
-for(p in RPs) for(s in steps) lines(smoothFFT(qdp[dist,p,,s],sd, quiet=TRUE), col=col[s], lwd=3)
+for(p in RPs) for(s in steps) lines(smoothFFT(qdp[dist,p,,s],sd, quiet=TRUE), col=col[s], lwd=lwd)
 abline(v=117+1)
 box(col=boxcol, lwd=boxlwd)
 ##if(box) box(col=boxcol[name], lwd=4)
