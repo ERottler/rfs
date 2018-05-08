@@ -14,15 +14,15 @@
 #' @param \dots Optional filename(s) that will be appended.
 #' @param warnonly Logical: only warn instead of stopping if files are not found. 
 #'                 NA to not check file existence. DEFAULT: FALSE
+#' @param path     Character: path to search in. DEFAULT: NA
 #' 
 seasFolder <- function(
 ...,
-warnonly=FALSE
+warnonly=FALSE,
+path=NA
 )
 {
-path <- "C:/Users/boessenkool/Dropbox/Promotion/6_Seasonality"
-# home PC path change:
-if(!file.exists(path)) path <- gsub("C:/Users/boessenkool", "S:", path)
+if(is.na(path)) path <- "S:/Dropbox/6_Seasonality"
 # laptop linux path change:
 if(!file.exists(path)) path <- gsub("S:", "/home/berry", path)
 if(!file.exists(path)) stop("Cannot find project path. Last try:", path)
