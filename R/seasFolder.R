@@ -11,7 +11,7 @@
 #' seasFolder("dummy.txt", warnonly=TRUE)
 #' stopifnot(length(seasFolder("dummy.txt", "dude.xyz", warnonly=TRUE))==2)
 #' 
-#' @param \dots Optional filename(s) that will be appended.
+#' @param \dots    Optional filename(s) that will be appended.
 #' @param warnonly Logical: only warn instead of stopping if files are not found. 
 #'                 NA to not check file existence. DEFAULT: FALSE
 #' @param path     Character: path to search in. DEFAULT: NA
