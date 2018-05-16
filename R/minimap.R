@@ -5,7 +5,7 @@
 # @seealso \code{\link{help}}, \code{\link{help}}
 #' @keywords hplot
 #' @importFrom png readPNG
-#' @importFrom berryFunctions checkFile smallPlot
+#' @importFrom berryFunctions checkFile smallPlot owa
 #' @importFrom graphics plot rasterImage points text
 #' @export
 #' @examples
@@ -19,6 +19,14 @@
 #' stats <- gnames("app")[c(1,5,8,12)]
 #' minimap(stats, expr=text(meta[name,"lon"], meta[name,"lat"], name, col=2, adj=c(0,1)))
 #' 
+#' op <- par(mfrow=c(2,2))
+#' plot(1:10)
+#' plot(1:10)
+#' plot(1:10)
+#' minimap("Koeln")
+#' minimap("Mainz", spargs=list(outer=TRUE))
+#' par(op)
+#' 
 #' pdf("test.pdf", height=5)
 #' hist(rnorm(100))
 #' minimap(c("Koeln","Rheinfelden"), y1=0.1, y2=0.9, x2=0.9)
@@ -30,22 +38,28 @@
 #' @param name        Station name(s) to be plotted with red crosses
 #' @param metadf      Dataframe with metadata. DEFAULT: meta
 #' @param x1,x2,y1,y2 Relative location of minimap
+#' @param spargs      List of arguments passed to \code{\link{smallPlot}}. DEFAULT: NULL
 #' @param pch,lwd,col Point properties
 #' @param allargs     List of arguments passed to all gauge locations first
 #' @param expr        Expression to be executed after points, see example. DEFAULT: NULL
 #' @param label       Logical (vector): Label gauges? DEFAULT: FALSE
-#' @param \dots       Further arguments passed to \code{plotmap} and then to \code{\link{points}}
+#' @param \dots       Further arguments passed from \code{minimap} to 
+#'                    \code{plotmap} and then to \code{\link{points}}
 #' 
 minimap <- function(
  name,                # station name(s) to be plotted with red crosses
  x1=0.1,x2=x1+0.2,    # relative location of minimap
  y1=0.7,y2=y1+0.27,
+ spargs=NULL,
  ...
  )
 {
-smallPlot(plotmap(name=name, ...),
-x1=x1,x2=x2,y1=y1,y2=y2, mar=c(0,0,0,0), bg="transparent", border=NA)
+defargs <- list(expr=substitute(plotmap(name=name, ...)), x1=x1,x2=x2,y1=y1,y2=y2,
+                mar=c(0,0,0,0), bg="transparent", border=NA)
+do.call(smallPlot, owa(defargs, spargs))
 }
+
+
 
 #' @export
 #' @rdname minimap

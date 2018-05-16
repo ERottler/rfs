@@ -5,7 +5,8 @@
 \alias{plotmap}
 \title{DEM plotting function}
 \usage{
-minimap(name, x1 = 0.1, x2 = x1 + 0.2, y1 = 0.7, y2 = y1 + 0.27, ...)
+minimap(name, x1 = 0.1, x2 = x1 + 0.2, y1 = 0.7, y2 = y1 + 0.27,
+  spargs = NULL, ...)
 
 plotmap(name, metadf = meta, pch = 3, lwd = 3, col = "red",
   allargs = NULL, expr = NULL, label = FALSE, ...)
@@ -15,7 +16,10 @@ plotmap(name, metadf = meta, pch = 3, lwd = 3, col = "red",
 
 \item{x1, x2, y1, y2}{Relative location of minimap}
 
-\item{\dots}{Further arguments passed to \code{plotmap} and then to \code{\link{points}}}
+\item{spargs}{List of arguments passed to \code{\link{smallPlot}}. DEFAULT: NULL}
+
+\item{\dots}{Further arguments passed from \code{minimap} to 
+\code{plotmap} and then to \code{\link{points}}}
 
 \item{metadf}{Dataframe with metadata. DEFAULT: meta}
 
@@ -43,6 +47,14 @@ minimap("Cochem", allargs=list(pch=3,cex=0.5))
 
 stats <- gnames("app")[c(1,5,8,12)]
 minimap(stats, expr=text(meta[name,"lon"], meta[name,"lat"], name, col=2, adj=c(0,1)))
+
+op <- par(mfrow=c(2,2))
+plot(1:10)
+plot(1:10)
+plot(1:10)
+minimap("Koeln")
+minimap("Mainz", spargs=list(outer=TRUE))
+par(op)
 
 pdf("test.pdf", height=5)
 hist(rnorm(100))
