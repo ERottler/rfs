@@ -13,7 +13,7 @@
 #' @param name        Gauge station name
 #' @param seaslist    Named list as e.g. returned by \code{lapply(SOMENAMES, qdoyPeriods)}
 #'                    DEFAULT: \code{\link{seas}}
-#' @param qdp         Array with qualtiles per doy and period as retuned by
+#' @param qdp         Array with qualtiles per doy and period as returned by
 #'                    \code{\link{qdoyPeriods}}. DEFAULT: \code{seaslist[[name]]}
 #' @param dist        Distribution function: gev or empirical. DEFAULT: "gev"
 #' @param metadf      Dataframe with metadata. DEFAULT: \code{\link{meta}}

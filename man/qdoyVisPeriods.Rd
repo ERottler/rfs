@@ -18,7 +18,7 @@ qdoyVisPeriods(name, seaslist = get("seas"), qdp = seaslist[[name]],
 \item{seaslist}{Named list as e.g. returned by \code{lapply(SOMENAMES, qdoyPeriods)}
 DEFAULT: \code{\link{seas}}}
 
-\item{qdp}{Array with qualtiles per doy and period as retuned by
+\item{qdp}{Array with qualtiles per doy and period as returned by
 \code{\link{qdoyPeriods}}. DEFAULT: \code{seaslist[[name]]}}
 
 \item{dist}{Distribution function: gev or empirical. DEFAULT: "gev"}
