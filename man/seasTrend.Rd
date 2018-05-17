@@ -6,7 +6,8 @@
 \usage{
 seasTrend(n, disdf = get("dis"), RP = 1.2, plot = TRUE, map = FALSE,
   trex = TRUE, peak = TRUE, startmonth = 1, nmonths = 12,
-  legpos = "left", shift = 61, seasargs = NULL, ...)
+  legpos = "left", trendargs = NULL, legargs = NULL, shift = 61,
+  seasargs = NULL, ...)
 }
 \arguments{
 \item{n}{Character: Name of gauge to be analyzed, see \code{\link{gnames}}}
@@ -28,7 +29,11 @@ are used in the trend analysis. DEFAULT: 1}
 
 \item{nmonths}{Integer between 1 and 12. Hom many months are used? DEFAULT: 12}
 
-\item{legpos}{Position of \code{\link{legend}}. DEFAULT: "left"}
+\item{legpos}{Position of trend info \code{\link{legend}}. DEFAULT: "left"}
+
+\item{trendargs}{List of further arguments for trend info. DEFAULT: NULL}
+
+\item{legargs}{List of arguments for Streamflow legend. DEFAULT: NULL}
 
 \item{shift}{Shift passed to \code{\link{seasonality}}. DEFAULT: 61}
 
@@ -48,6 +53,7 @@ Seasonality trend 1960:2010
 load(seasFolder("data/dismeta.Rdata"))
 seasTrend("Koeln")
 seasTrend("Koeln", seasargs=list(xaxt="n", tlab="Empty"))
+seasTrend("Koeln", legargs=list(y1=0.7, y2=0.95))
 
 }
 \seealso{

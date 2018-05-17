@@ -14,6 +14,7 @@
 #' load(seasFolder("data/dismeta.Rdata"))
 #' seasTrend("Koeln")
 #' seasTrend("Koeln", seasargs=list(xaxt="n", tlab="Empty"))
+#' seasTrend("Koeln", legargs=list(y1=0.7, y2=0.95))
 #'
 #' @param n      Character: Name of gauge to be analyzed, see \code{\link{gnames}}
 #' @param disdf  Dataframe with columns "date" and \code{n}. DEFAULT: dis
@@ -25,7 +26,9 @@
 #' @param startmonth Integer between 1 and 12. To select which months
 #'               are used in the trend analysis. DEFAULT: 1
 #' @param nmonths Integer between 1 and 12. Hom many months are used? DEFAULT: 12
-#' @param legpos Position of \code{\link{legend}}. DEFAULT: "left"
+#' @param legpos Position of trend info \code{\link{legend}}. DEFAULT: "left"
+#' @param trendargs List of further arguments for trend info. DEFAULT: NULL
+#' @param legargs List of arguments for Streamflow legend. DEFAULT: NULL
 #' @param shift  Shift passed to \code{\link{seasonality}}. DEFAULT: 61
 #' @param seasargs List of arguments passed to \code{\link{seasonality}}, 
 #'               like e.g. seasargs=list(xaxt="n"). DEFAULT: NULL
@@ -42,6 +45,8 @@ peak=TRUE,
 startmonth=1,
 nmonths=12,
 legpos="left",
+trendargs=NULL,
+legargs=NULL,
 shift=61,
 seasargs=NULL,
 ...
@@ -86,12 +91,16 @@ if(plot)
   if(peak) linReg(doy~year, data=s_peak, add=TRUE, plotrange=1960:2011, col="purple", 
                   colband=addAlpha("purple", alpha=0.08), lwd=2, pos1=NA, ...)
   if(trex) linReg(doy~year, data=s_trex, add=TRUE, plotrange=1960:2011, col="orange", pos1=NA, lwd=2, ...)
-  legend(x=legpos, c(ifelse(trex, l_trex, " \n \n "), ifelse(peak, l_peak, " \n ")), 
-         lty=0, text.col=c("orange","purple"), bg=addAlpha("white"), box.lty=0)
+ 
+  trenddef <- list(x=legpos, 
+           legend=c(ifelse(trex, l_trex, " \n \n "), ifelse(peak, l_peak, " \n ")), 
+           lty=0, text.col=c("orange","purple"), bg=addAlpha("white"), box.lty=0)
+  do.call(legend, owa(trenddef, trendargs))
   # Legend and map:
-  colPointsLegend(z=disdf[large,n], nlab=4, title=paste0("Streamflow > ",
+  legdef <- list(z=disdf[large,n], nlab=4, title=paste0("Streamflow > ",
                   round(min(disdf[large,n], na.rm=TRUE)),"  [m\U{00B3}/s]"), 
                   y1=0.89, y2=1, colors=col)
+  do.call(colPointsLegend, owa(legdef, legargs))
   if(map) minimap(n)
   }
 # Output
