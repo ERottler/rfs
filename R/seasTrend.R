@@ -6,13 +6,14 @@
 #' @seealso \code{\link{rfsApp}("trend")}
 #' @keywords aplot
 #' @importFrom extremeStat distLextreme
-#' @importFrom berryFunctions almost.equal seasonality between linReg colPointsLegend addAlpha
+#' @importFrom berryFunctions almost.equal seasonality between linReg colPointsLegend addAlpha owa
 #' @importFrom stats coef lm
 #' @importFrom graphics plot.new
 #' @export
 #' @examples
 #' load(seasFolder("data/dismeta.Rdata"))
 #' seasTrend("Koeln")
+#' seasTrend("Koeln", seasargs=list(xaxt="n", tlab="Empty"))
 #'
 #' @param n      Character: Name of gauge to be analyzed, see \code{\link{gnames}}
 #' @param disdf  Dataframe with columns "date" and \code{n}. DEFAULT: dis
@@ -26,6 +27,8 @@
 #' @param nmonths Integer between 1 and 12. Hom many months are used? DEFAULT: 12
 #' @param legpos Position of \code{\link{legend}}. DEFAULT: "left"
 #' @param shift  Shift passed to \code{\link{seasonality}}. DEFAULT: 61
+#' @param seasargs List of arguments passed to \code{\link{seasonality}}, 
+#'               like e.g. seasargs=list(xaxt="n"). DEFAULT: NULL
 #' @param \dots  Further arguments passed to \code{\link{linReg}}
 #' 
 seasTrend <- function(
@@ -40,6 +43,7 @@ startmonth=1,
 nmonths=12,
 legpos="left",
 shift=61,
+seasargs=NULL,
 ...
 )
 {
@@ -61,10 +65,12 @@ large <- which(large)
 meta <- get("meta")
 col <- seqPal(100)
 if(!trex) col <- NA
-s <- seasonality(disdf[large,"date"], disdf[large,n], shift=shift, nmax=1, pch=15,
-            main=paste0(n, ", ", meta[n,"river"]), returnall=TRUE, col=col,
-            maxargs=list(col=if(peak) "purple" else NA), adj=0.4,
-            drange=1930:2012, legend=FALSE, plot=ifelse(plot,1,0), hlines=TRUE)
+seasdef <- list(dates=disdf[large,"date"], values=disdf[large,n], shift=shift, 
+                nmax=1, pch=15, main=paste0(n, ", ", meta[n,"river"]), 
+                returnall=TRUE, col=col, maxargs=list(col=if(peak) "purple" else NA), 
+                adj=0.4, drange=1930:2012, legend=FALSE, plot=ifelse(plot,1,0), 
+                hlines=TRUE)
+s <- do.call(seasonality, owa(seasdef, seasargs))
 # Trend line:
 s_trex <- s$data  [between(s$data$year,   1960, 2010),]
 s_peak <- s$annmax[between(s$annmax$year, 1960, 2010),]

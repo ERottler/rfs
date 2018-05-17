@@ -6,7 +6,7 @@
 \usage{
 seasTrend(n, disdf = get("dis"), RP = 1.2, plot = TRUE, map = FALSE,
   trex = TRUE, peak = TRUE, startmonth = 1, nmonths = 12,
-  legpos = "left", shift = 61, ...)
+  legpos = "left", shift = 61, seasargs = NULL, ...)
 }
 \arguments{
 \item{n}{Character: Name of gauge to be analyzed, see \code{\link{gnames}}}
@@ -32,6 +32,9 @@ are used in the trend analysis. DEFAULT: 1}
 
 \item{shift}{Shift passed to \code{\link{seasonality}}. DEFAULT: 61}
 
+\item{seasargs}{List of arguments passed to \code{\link{seasonality}}, 
+like e.g. seasargs=list(xaxt="n"). DEFAULT: NULL}
+
 \item{\dots}{Further arguments passed to \code{\link{linReg}}}
 }
 \value{
@@ -44,6 +47,7 @@ Seasonality trend 1960:2010
 \examples{
 load(seasFolder("data/dismeta.Rdata"))
 seasTrend("Koeln")
+seasTrend("Koeln", seasargs=list(xaxt="n", tlab="Empty"))
 
 }
 \seealso{
