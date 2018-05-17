@@ -33,7 +33,8 @@ are used in the trend analysis. DEFAULT: 1}
 
 \item{trendargs}{List of further arguments for trend info. DEFAULT: NULL}
 
-\item{legargs}{List of arguments for Streamflow legend. DEFAULT: NULL}
+\item{legargs}{List of arguments for Streamflow legend via 
+\code{\link{colPointsLegend}}. DEFAULT: NULL}
 
 \item{shift}{Shift passed to \code{\link{seasonality}}. DEFAULT: 61}
 

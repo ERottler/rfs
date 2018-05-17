@@ -28,7 +28,8 @@
 #' @param nmonths Integer between 1 and 12. Hom many months are used? DEFAULT: 12
 #' @param legpos Position of trend info \code{\link{legend}}. DEFAULT: "left"
 #' @param trendargs List of further arguments for trend info. DEFAULT: NULL
-#' @param legargs List of arguments for Streamflow legend. DEFAULT: NULL
+#' @param legargs List of arguments for Streamflow legend via 
+#'               \code{\link{colPointsLegend}}. DEFAULT: NULL
 #' @param shift  Shift passed to \code{\link{seasonality}}. DEFAULT: 61
 #' @param seasargs List of arguments passed to \code{\link{seasonality}}, 
 #'               like e.g. seasargs=list(xaxt="n"). DEFAULT: NULL
